@@ -24,7 +24,7 @@ const Hero = () => {
               placeholder="Search article"
             />
           </div>
-          <button className="md:absolute md:right-2 md:top-[14px]  md:h-8 md:-translate-y-1/2 md:w-20 w-full border-none text-white hover:bg-blue-700 h-10 bg-primary rounded-lg mt-2 font-semibold">
+          <button className="md:absolute md:right-2 md:top-[14px]  md:h-8 md:-translate-y-1/2 md:w-20 w-full border-none text-white hover:bg-blue-700 h-10 bg-primary rounded-lg mt-2 font-semibold transition-all ease-linear">
             Search
           </button>
         </div>

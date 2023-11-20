@@ -30,7 +30,7 @@ const CTA = () => {
                 className="text-dark-hard outline-none md:h-9 h-10 w-[17rem] md:w-64 p-3 rounded-lg"
                 placeholder="Your Email"
               />
-              <button className="bg-primary hover:bg-blue-700 md:h-9 h-10 w-full md:w-max px-3 center rounded-lg font-semibold">
+              <button className="bg-primary hover:bg-blue-700 md:h-9 h-10 w-full md:w-max px-3 center rounded-lg font-semibold transition-all ease-linear ">
                 Get started
               </button>
             </div>
