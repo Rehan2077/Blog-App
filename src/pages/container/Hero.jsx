@@ -52,7 +52,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="lg:flex justify-end  hidden xl:w-1/2 ">
-        <img className="" src={images.HeroImage} alt="Live chat image" />
+        <img className="" src={images.HeroImage} alt="Live chat" />
       </div>
     </section>
   );

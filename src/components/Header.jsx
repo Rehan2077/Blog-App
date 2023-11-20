@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { images } from "../constants";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { RiArrowDownSLine, RiArrowUpSLine, RiCloseLine } from "react-icons/ri";
+import { RiArrowDownSLine, RiCloseLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
@@ -32,30 +33,50 @@ const Header = () => {
           <ol
             className={`flex flex-col lg:flex-row gap-12 font-semibold items-center`}
           >
-            <li className="hover:text-primary transition-colors ease-linear">
-              HOME
+            <li
+              className="hover:text-primary transition-colors ease-linear"
+              onClick={navVisiblitiyHandler}
+            >
+              <Link to={""}>HOME</Link>
             </li>
-            <li className="hover:text-primary transition-colors ease-linear">
-              ARTICLE
+            <li
+              className="hover:text-primary transition-colors ease-linear"
+              onClick={navVisiblitiyHandler}
+            >
+              <Link to={"article"}>ARTICLE</Link>
             </li>
             <li className="relative group">
-              <span className=" flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear">
-                PAGES <RiArrowDownSLine />
-              </span>
+              <Link to={""}>
+                <span className=" flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear">
+                  PAGES <RiArrowDownSLine />
+                </span>
+              </Link>
               <ol className="text-md  absolute left-[80px] -bottom-[20px] lg:top-5 lg:pt-6 lg:-left-1  group-hover:block lg:w-28 w-28 hidden rounded-xl ">
-                <li className="p-1 w-full hover:text-primary rounded-t-xl hover:bg-gray-200 ">
-                  ABOUT US
+                <li
+                  className="p-1 w-full hover:text-primary rounded-t-xl hover:bg-gray-200 "
+                  onClick={navVisiblitiyHandler}
+                >
+                  <Link to={""}>ABOUT US</Link>
                 </li>
-                <li className="p-1 w-full hover:text-primary rounded-b-xl hover:bg-gray-200 ">
-                  CONTACT US
+                <li
+                  className="p-1 w-full hover:text-primary rounded-b-xl hover:bg-gray-200 "
+                  onClick={navVisiblitiyHandler}
+                >
+                  <Link to={""}>CONTACT US</Link>
                 </li>
               </ol>
             </li>
-            <li className="hover:text-primary transition-colors ease-linear">
+            <li
+              className="hover:text-primary transition-colors ease-linear"
+              onClick={navVisiblitiyHandler}
+            >
               FAQ
             </li>
             <li>
-              <button className="border-2 px-4 py-1 md:mr-3 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg">
+              <button
+                className="border-2 px-4 py-1 md:mr-3 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg"
+                onClick={navVisiblitiyHandler}
+              >
                 SIGN IN
               </button>
             </li>
