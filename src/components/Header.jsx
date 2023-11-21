@@ -51,15 +51,15 @@ const Header = () => {
                   PAGES <RiArrowDownSLine />
                 </span>
               </Link>
-              <ol className="text-md  absolute left-[80px] -bottom-[20px] lg:top-5 lg:pt-6 lg:-left-1  group-hover:block lg:w-28 w-28 hidden rounded-xl ">
+              <ol className="text-md  absolute left-[80px] -bottom-[20px]  lg:top-5 lg:pt-6 lg:-left-1  group-hover:block w-28 lg:w-32 hidden rounded-xl ">
                 <li
-                  className="p-1 w-full hover:text-primary rounded-t-xl hover:bg-gray-200 "
+                  className="p-1 w-full hover:text-primary lg:pl-3 rounded-t-xl bg-gray-100 hover:bg-gray-200 "
                   onClick={navVisiblitiyHandler}
                 >
                   <Link to={""}>ABOUT US</Link>
                 </li>
                 <li
-                  className="p-1 w-full hover:text-primary rounded-b-xl hover:bg-gray-200 "
+                  className="p-1 w-full hover:text-primary lg:pl-3 rounded-b-xl bg-gray-100 hover:bg-gray-200 "
                   onClick={navVisiblitiyHandler}
                 >
                   <Link to={""}>CONTACT US</Link>

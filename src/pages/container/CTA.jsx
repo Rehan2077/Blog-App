@@ -12,10 +12,11 @@ const CTA = () => {
       >
         <path
           id="Wave"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M2160 262.5H0V0C360 80 720 120 1080 120C1440 120 1800 80 2160 0V262.5Z"
           fill="#0D2436"
+          // className="filter-[invert(10%) sepia(10%) saturate(5391%) hue-rotate(170deg) brightness(98%) contrast(93%);]"
         />
       </svg>
       <section className="px-5 bg-dark-hard ">
