@@ -2,12 +2,11 @@ import React, { useState } from "react";
 
 const CommentsForm = ({
   btnLabel,
+  commentText = "",
   formSubmitHandler,
   formCancelHandler = null,
-  updateComment,
 }) => {
-  const [comment, setComment] = useState("");
-
+  const [comment, setComment] = useState(commentText);
   const submitHandler = (e) => {
     e.preventDefault();
     if (comment && comment.length > 0) {

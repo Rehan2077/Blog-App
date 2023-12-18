@@ -6,11 +6,11 @@ import Comment from "./Comment";
 const CommentsContainer = () => {
   const [comments, setComments] = useState([]);
   const mainComments = comments.filter((comment) => comment.parent === null);
-  const [affectedComment, setAffectedComment] = useState([]);
+  const [affectedComment, setAffectedComment] = useState(null);
 
   const loggedInUserId = "a";
 
-  console.log(comments, mainComments);
+  console.log(comments);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +21,7 @@ const CommentsContainer = () => {
 
   const addCommentHandler = (comment, parent = null, replyOnUser = null) => {
     const newComment = {
-      _id: "10",
+      _id: Date.now(),
       user: {
         _id: "a",
         name: "Rehan",
@@ -47,12 +47,19 @@ const CommentsContainer = () => {
     setAffectedComment(null);
   };
 
+  const deleteCommentHandler = (commentId) => {
+    const updatedComments = comments.filter(
+      (comment) => comment._id !== commentId
+    );
+    setComments(updatedComments);
+    setAffectedComment(null);
+  };
+
   return (
     <div className={`mt-10 lg:mb-10`}>
       <CommentsForm
         btnLabel={"Submit"}
         formSubmitHandler={(comment) => addCommentHandler(comment)}
-        formCancelHandler={() => setAffectedComment(null)}
       />
       <h2 className="text-lg text-dark-hard mt-7 font-roboto font-[450] lg:text-xl">
         All Comments ({comments.length})
@@ -66,8 +73,9 @@ const CommentsContainer = () => {
             affectedComment={affectedComment}
             setAffectedComment={setAffectedComment}
             addComment={addCommentHandler}
+            deleteComment={deleteCommentHandler}
             parentId={""}
-            updateCommentHandler={updateCommentHandler}
+            updateComment={updateCommentHandler}
           />
         ))}
       </div>

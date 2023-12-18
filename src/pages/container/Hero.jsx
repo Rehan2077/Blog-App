@@ -15,7 +15,7 @@ const Hero = () => {
           vibrant community as we unravel the intricacies of development, share
           inspiring stories, and foster a passion for tech exploration!
         </p>
-        <div className="flex flex-col lg:mt-3 lg:flex-row xl:mt-3 relative mt-7">
+        <div className="flex flex-col lg:mt-3 lg:flex-row xl:mt-3 2xl:mt-10 relative mt-7">
           <div className="relative md:w-full">
             <FiSearch className=" absolute md:top-[12px] top-[10px] left-2 w-5 h-5 text-[#959EAD]" />
             <input

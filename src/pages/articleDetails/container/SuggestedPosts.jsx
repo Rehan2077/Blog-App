@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SuggestedPosts = ({ classname, header, posts = [], tags=[] }) => {
   return (
     <section
-      className={`h-fit rounded-lg p-4 mt-10 mb-5 xl:mt-5 lg:w-1/3 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] ${classname}`}
+      className={`h-fit rounded-lg p-4 mt-10 mb-5  lg:w-1/3 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] ${classname}`}
     >
       <h2 className="text-lg text-dark-hard font-roboto font-[450] lg:text-xl">
         {header}

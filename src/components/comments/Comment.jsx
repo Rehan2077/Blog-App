@@ -11,8 +11,9 @@ const Comment = ({
   affectedComment,
   setAffectedComment,
   addComment,
+  deleteComment,
   parentId,
-  updateCommentHandler,
+  updateComment,
 }) => {
   const isUserLoggedIn = Boolean(loggedInUserId);
 
@@ -61,13 +62,7 @@ const Comment = ({
         <p className="text-dark-soft font-opensans my-3 lg:text-lg">
           {comment.desc}
         </p>
-        {isEditing && (
-          <CommentsForm
-            btnLabel={"Updating"}
-            formSubmitHandler={(comment) => updateCommentHandler(comment, comment._id)}
-            formCancelHandler={() => setAffectedComment(null)}
-          />
-        )}
+
         {isUserLoggedIn && (
           <div className="flex gap-4 text-sm text-dark-thin items-center">
             {comment.user._id === loggedInUserId ? (
@@ -83,14 +78,21 @@ const Comment = ({
                 </button>
                 <button
                   onClick={() =>
-                    setAffectedComment({ type: "editing", _id: comment._id })
+                    setAffectedComment({
+                      type: "editing",
+                      _id: comment._id,
+                      desc: comment.desc,
+                    })
                   }
                   className="flex items-center hover:text-dark-soft gap-1"
                 >
                   <BiEdit />
                   Edit
                 </button>
-                <button className="flex items-center hover:text-dark-soft gap-[0.1rem]">
+                <button
+                  onClick={() => deleteComment(comment._id)}
+                  className="flex items-center hover:text-dark-soft gap-[0.1rem]"
+                >
                   <BiTrashAlt />
                   Delete
                 </button>
@@ -107,6 +109,16 @@ const Comment = ({
               </button>
             )}
           </div>
+        )}
+        {isEditing && (
+          <CommentsForm
+            btnLabel={"Update"}
+            commentText={affectedComment.desc}
+            formSubmitHandler={(comment) =>
+              updateComment(comment, affectedComment._id)
+            }
+            formCancelHandler={() => setAffectedComment(null)}
+          />
         )}
         {isReplying && (
           <CommentsForm
