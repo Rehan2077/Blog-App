@@ -146,7 +146,7 @@ const Comment = ({
             replyComment.parent._id === comment._id && (
               <Comment
                 key={replyComment._id}
-                classname="pl-7"
+                classname="pl-7 "
                 comment={replyComment}
                 loggedInUserId={loggedInUserId}
                 affectedComment={affectedComment}
