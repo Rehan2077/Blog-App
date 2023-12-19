@@ -6,6 +6,7 @@ import Comment from "./Comment";
 const CommentsContainer = () => {
   const [comments, setComments] = useState([]);
   const mainComments = comments.filter((comment) => comment.parent === null);
+  const replyComments = comments.filter((comment) => comment.parent !== null);
   const [affectedComment, setAffectedComment] = useState(null);
 
   const loggedInUserId = "a";
@@ -67,6 +68,7 @@ const CommentsContainer = () => {
       <div className="space-y-4 mt-4">
         {mainComments.map((comment) => (
           <Comment
+          classname="p-3"
             key={comment._id}
             comment={comment}
             loggedInUserId={loggedInUserId}
@@ -76,6 +78,7 @@ const CommentsContainer = () => {
             deleteComment={deleteCommentHandler}
             parentId={""}
             updateComment={updateCommentHandler}
+            replyComments={replyComments}
           />
         ))}
       </div>

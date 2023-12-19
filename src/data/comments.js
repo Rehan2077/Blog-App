@@ -20,7 +20,7 @@ export const getCommentsData = async () => {
       },
       desc: "a reply for Mohammad",
       post: "1",
-      parent: "10",
+      parent: {_id: "10", name:"Mohammad Rezaii"},
       replyOnUser: "a",
       createdAt: "2022-12-31T17:22:05.092+0000",
     },
