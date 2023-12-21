@@ -47,7 +47,7 @@ const Register = () => {
                 },
                 required: { value: true, message: "Please enter your name" },
               })}
-              className={`py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
                 errors?.name && "border-red-500 outline-none"
               }`}
               type="text"
@@ -56,7 +56,7 @@ const Register = () => {
               name="name"
             />
             {errors.name?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.8rem] italic ml-1">
+              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
                 {errors.name?.message}
               </p>
             )}
@@ -72,7 +72,7 @@ const Register = () => {
                 },
                 required: { value: true, message: "Please enter your email" },
               })}
-              className={`py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
                 errors?.email && "border-red-500 outline-none"
               }`}
               type="email"
@@ -81,7 +81,7 @@ const Register = () => {
               name="email"
             />
             {errors.email?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.8rem] italic ml-1">
+              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
                 {errors.email?.message}
               </p>
             )}
@@ -96,7 +96,7 @@ const Register = () => {
                 },
                 required: { value: true, message: "Password is required!" },
               })}
-              className={`py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
                 errors?.password && "border-red-500 outline-none"
               }`}
               type="password"
@@ -105,7 +105,7 @@ const Register = () => {
               name="password"
             />
             {errors.password?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.8rem] italic ml-1">
+              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
                 {errors.password?.message}
               </p>
             )}
@@ -121,7 +121,7 @@ const Register = () => {
                   }
                 },
               })}
-              className={`py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
                 errors?.confirmPassword && "border-red-500 outline-none"
               }`}
               type="password"
@@ -130,7 +130,7 @@ const Register = () => {
               name="confirmPassword"
             />
             {errors.confirmPassword?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.8rem] italic ml-1">
+              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
                 {errors.confirmPassword?.message}
               </p>
             )}
@@ -143,7 +143,7 @@ const Register = () => {
             <button
               type="submit"
               disabled={!isValid}
-              className={`my-4 py-3 border-none cursor-pointer text-white hover:bg-blue-700 bg-primary rounded-lg font-semibold transition-all ease-linear disabled:opacity-50 disabled:hover:bg-primary disabled:cursor-not-allowed`}
+              className={`my-4 py-2 md:py-3 border-none cursor-pointer text-white hover:bg-blue-700 bg-primary rounded-lg font-semibold transition-all ease-linear disabled:opacity-50 disabled:hover:bg-primary disabled:cursor-not-allowed`}
             >
               Register
             </button>
