@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="relative md:w-full">
             <FiSearch className=" absolute md:top-[12px] top-[10px] left-2 w-5 h-5 text-[#959EAD]" />
             <input
-              className="md:flex-1 md:h-11 h-10 placeholder:font-semibold text-dark-hard pl-10 pr-3 md:pr-24 outline-none w-full md:w-full lg:w-full rounded-lg shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear focus:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px]"
+              className="md:flex-1 md:h-11 h-10 placeholder:font-semibold text-dark-hard pl-10 pr-3 md:pr-24 outline-none w-full rounded-lg shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear focus:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px]"
               type="text"
               placeholder="Search article"
             />

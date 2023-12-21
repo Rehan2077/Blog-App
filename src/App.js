@@ -1,9 +1,9 @@
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/home/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ArticlePage from './pages/articleDetails/ArticlePage'
+import Register from './pages/register/Register'
 
 const App = () => {
   return (
@@ -12,6 +12,7 @@ const App = () => {
       <Routes>
         <Route index path='/' element={<Home />} />
         <Route path='/article' element={<ArticlePage />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
       <Footer />
     </Router>
