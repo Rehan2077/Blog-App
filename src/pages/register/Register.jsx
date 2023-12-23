@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { signup } from "../../services/index/userSignup";
+import toast from "react-hot-toast";
 
 const Register = () => {
+    
+  const { mutate, isLoading } = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      toast.success("Sign Up successfull");
+      console.log(data);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -20,7 +36,8 @@ const Register = () => {
   const password = watch("password");
 
   const submitHandler = (data) => {
-    console.log(data);
+    const { name, email, password } = data;
+    mutate({ name, email, password });
   };
 
   return (
@@ -142,7 +159,7 @@ const Register = () => {
             </Link>
             <button
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid || isLoading}
               className={`my-4 py-2 md:py-3 border-none cursor-pointer text-white hover:bg-blue-700 bg-primary rounded-lg font-semibold transition-all ease-linear disabled:opacity-50 disabled:hover:bg-primary disabled:cursor-not-allowed`}
             >
               Register
