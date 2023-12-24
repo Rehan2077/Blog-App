@@ -25,7 +25,7 @@ const CommentsContainer = () => {
       _id: Date.now(),
       user: {
         _id: "a",
-        name: "Rehan",
+        name: "Aditi",
       },
       desc: comment,
       post: "1",
