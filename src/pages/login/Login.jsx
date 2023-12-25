@@ -1,18 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { signup } from "../../services/index/userSignup";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../../store/reducers/user";
 import { useEffect } from "react";
+import { signin } from "../../services/index/userSignin";
 
-const Register = () => {
+const Login = () => {
 
   const dispatch = useDispatch()
     
   const { mutate, isLoading } = useMutation({
-    mutationFn: signup,
+    mutationFn: signin,
     onSuccess: (data) => {
       toast.success(data.message);
       console.log(data);
@@ -31,10 +31,8 @@ const Register = () => {
     watch,
   } = useForm({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     mode: "onChange",
   });
@@ -42,14 +40,14 @@ const Register = () => {
   const password = watch("password");
 
   const submitHandler = (data) => {
-    const { name, email, password } = data;
-    mutate({ name, email, password });
+    const { email, password } = data;
+    mutate({ email, password });
   };
 
   const {userInfo} = useSelector(state=>state.user); 
   const navigate = useNavigate();
   
-  // console.log(userInfo);
+  
   useEffect(()=>{
     if(userInfo) navigate("/")
   },[navigate,userInfo])
@@ -77,7 +75,7 @@ const Register = () => {
                     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: "Please enter a valid email",
                 },
-                required: { value: true, message: "Please enter your email" },
+                required: { value: true, message: "Please enter your registered email" },
               })}
               className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
                 errors?.email && "border-red-500 outline-none"
@@ -97,10 +95,6 @@ const Register = () => {
             </label>
             <input
               {...register("password", {
-                minLength: {
-                  value: 6,
-                  message: "Password length must be atleast 6 characters!",
-                },
                 required: { value: true, message: "Password is required!" },
               })}
               className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
@@ -146,4 +140,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

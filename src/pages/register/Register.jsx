@@ -3,20 +3,17 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "../../services/index/userSignup";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "../../store/reducers/user";
-import { useEffect } from "react";
 
 const Register = () => {
 
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
     
   const { mutate, isLoading } = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
       toast.success(data.message);
       console.log(data);
-      dispatch(setUserInfo(data.user));
+      navigate("/login");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -46,13 +43,7 @@ const Register = () => {
     mutate({ name, email, password });
   };
 
-  const {userInfo} = useSelector(state=>state.user); 
-  const navigate = useNavigate();
-  
-  // console.log(userInfo);
-  useEffect(()=>{
-    if(userInfo) navigate("/")
-  },[navigate,userInfo])
+
 
   return (
     <section className="container mx-auto px-5 py-5 lg:py-10">

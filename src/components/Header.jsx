@@ -1,15 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { images } from "../constants";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiArrowDownSLine, RiCloseLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../services/index/userLogout";
 
 const Header = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
   const navVisiblitiyHandler = () => setNavIsVisible((prev) => !prev);
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const {userInfo} = useSelector((state) => state.user);
+  const handleLogOut = () => {
+      dispatch(logout());
+      navigate("/");
+  };
 
   return (
     <section className="shadow-md sticky top-0 z-50 bg-white">
@@ -49,26 +56,30 @@ const Header = () => {
               <Link to={"article"}>ARTICLE</Link>
             </li>
             <li className="relative group">
+              <Link to={""}>
+                <span className=" flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear">
+                  PAGES <RiArrowDownSLine />
+                </span>
+              </Link>
+              <ol className="text-md  absolute left-[82px] -bottom-[20px]  lg:top-5 lg:pt-6 lg:-left-1  group-hover:block w-28 lg:w-32 hidden rounded-xl ">
                 <Link to={""}>
-                  <span className=" flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear">
-                    PAGES <RiArrowDownSLine />
-                  </span>
+                  <li
+                    className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl`}
+                    onClick={navVisiblitiyHandler}
+                  >
+                    ABOUT US
+                  </li>
                 </Link>
-                <ol className="text-md  absolute left-[80px] -bottom-[20px]  lg:top-5 lg:pt-6 lg:-left-1  group-hover:block w-28 lg:w-32 hidden rounded-xl ">
+                <Link to={""}>
                   <li
-                    className="pl-2 py-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl bg-gray-100 hover:bg-gray-200 "
+                    className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-b-xl `}
                     onClick={navVisiblitiyHandler}
                   >
-                    <Link to={""}>ABOUT US</Link>
+                    CONTACT US
                   </li>
-                  <li
-                    className="pl-2 py-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-b-xl bg-gray-100 hover:bg-gray-200 "
-                    onClick={navVisiblitiyHandler}
-                  >
-                    <Link to={""}>CONTACT US</Link>
-                  </li>
-                </ol>
-              </li>
+                </Link>
+              </ol>
+            </li>
             <li
               className="hover:text-primary transition-colors ease-linear"
               onClick={navVisiblitiyHandler}
@@ -76,35 +87,46 @@ const Header = () => {
               FAQ
             </li>
             <li>
-              {
-                userInfo? <li className="relative group">
-                <Link to={""}>
-                  <span className={`flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear`}>
-                    PROFILE <RiArrowDownSLine />
-                  </span>
-                </Link>
-                <ol className={`text-md  absolute left-[80px] -bottom-[20px] lg:top-5 lg:pt-6 lg:-left-3   group-hover:block w-28 lg:w-32 hidden rounded-xl ${navIsVisible && "left-[6rem]"}`}>
-                  <li
-                    className="pl-2 py-2  w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl bg-gray-100 hover:bg-gray-200 "
-                    onClick={navVisiblitiyHandler}
-                  >
-                    <Link to={""}>DASHBOARD</Link>
-                  </li>
-                  <li
-                    className="pl-2 py-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-b-xl bg-gray-100 hover:bg-gray-200 "
-                    onClick={navVisiblitiyHandler}
-                  >
-                    <Link to={""}>LOG OUT</Link>
+              {userInfo ? (
+                <ol>
+                  <li className="relative group">
+                    <Link to={""}>
+                      <span className="flex items-center gap-1 ml-3 lg:m-0 border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg">
+                        PROFILE <RiArrowDownSLine />
+                      </span>
+                    </Link>
+                    <ol
+                      className={`text-md absolute left-[7.3rem] -bottom-[20px] lg:top-7 lg:pt-6 lg:-left-3 group-hover:block w-28 lg:w-32 hidden rounded-xl `}
+                    >
+                      <Link to={""}>
+                        <li
+                          className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl`}
+                          onClick={navVisiblitiyHandler}
+                        >
+                          DASHBOARD
+                        </li>
+                      </Link>
+                      <Link onClick={handleLogOut}>
+                        <li
+                          className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-red-600 lg:pl-3 rounded-b-xl`}
+                          onClick={navVisiblitiyHandler}
+                        >
+                          LOG OUT
+                        </li>
+                      </Link>
+                    </ol>
                   </li>
                 </ol>
-              </li> : <button
-                className="border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg"
-                onClick={navVisiblitiyHandler}
-              >
-                <Link to={"/register"}>SIGN IN</Link>
-              </button>
-              }
-              
+              ) : (
+                <Link to={"/register"}>
+                  <button
+                    className="border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg"
+                    onClick={navVisiblitiyHandler}
+                  >
+                    SIGN IN
+                  </button>
+                </Link>
+              )}
             </li>
           </ol>
         </div>

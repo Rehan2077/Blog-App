@@ -7,7 +7,7 @@ const Article = () => {
   return (
     <section className="container mx-auto flex flex-wrap md:gap-5 px-5 ">
       {/* <h1>Blogs</h1> */}
-      <div className="flex gap-x-7 md:gap-x-10 2xl:gap-x-12 justify-center 2xl:justify-normal gap-y-10 xl:gap-x-7 flex-wrap">
+      <div className="flex gap-x-7 md:gap-x-10 xl:gap-x-7 2xl:gap-x-11 justify-center 2xl:justify-normal gap-y-10 flex-wrap">
         <ArticleCard classname={" "} />
         <ArticleCard classname={" "} />
         <ArticleCard classname={" "} />

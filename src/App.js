@@ -6,8 +6,21 @@ import ArticlePage from "./pages/articleDetails/ArticlePage";
 import Register from "./pages/register/Register";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/login/Login";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "./store/reducers/user";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get("/api/v1/users/profile")
+      .then((res) => dispatch(setUserInfo(res.data.user)))
+      .catch((err) => console.log(err));
+  });
+
   return (
     <>
       <Router>

@@ -2,13 +2,17 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 
 import { images } from "../../constants";
+import { useSelector } from "react-redux";
 
 const Hero = () => {
+
+  const {userInfo} = useSelector(state=>state.user)
+
   return (
     <section className="container mx-auto p-5 flex flex-col lg:flex-row justify-between  ">
       <div className="lg:mt-15 md:mt-12 lg:w-2/5">
         <h1 className="font-roboto text-dark-soft text-3xl text-center lg:text-left md:text-4xl lg:text-3xl xl:text-5xl font-semibold">
-          Read the most <br /> interesting articles
+          Read the most <br /> interesting articles  {userInfo && userInfo.name}
         </h1>
         <p className="text-dark-thin mt-4 text-center lg:mt-2 lg:text-lg xl:text-xl md:text-xl lg:text-left ">
           Welcome to DevBlog, your digital haven for all things code - join our
