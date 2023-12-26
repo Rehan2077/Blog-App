@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "./store/reducers/user";
+import Profile from "./pages/profile/Profile";
+import UpdateProfile from "./pages/profile/UpdateProfile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,8 @@ const App = () => {
       .catch((err) => console.log(err));
   });
 
+
+
   return (
     <>
       <Router>
@@ -30,6 +34,8 @@ const App = () => {
           <Route path="/article" element={<ArticlePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/updateprofile" element={<UpdateProfile/>} />
         </Routes>
         <Footer />
       </Router>

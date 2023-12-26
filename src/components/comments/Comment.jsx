@@ -3,6 +3,7 @@ import { BiConversation, BiEdit, BiTrashAlt } from "react-icons/bi";
 
 import { images } from "../../constants";
 import CommentsForm from "./CommentsForm";
+import { formatDate } from "../../utils/formatDate";
 
 const Comment = ({
   comment = null,
@@ -33,23 +34,6 @@ const Comment = ({
     : { _id: comment._id, name: comment.user.name };
   const replyOnUserId = comment.user._id;
 
-  const formatDate = () => {
-    const date = new Date(comment.createdAt);
-    const formattedDate = date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "2-digit",
-    });
-
-    const formattedTime = date.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-
-    return `${formattedDate}, ${formattedTime}`;
-  };
-
   return (
     <div
       className={`flex  flex-col bg-[#F2F4F5] rounded-lg  `}
@@ -64,7 +48,7 @@ const Comment = ({
           <h3 className="text-base md:text-lg font-semibold text-dark-hard">
             {comment.user.name}
           </h3>
-          <p className="text-sm text-dark-thin">{formatDate()}</p>
+          <p className="text-sm text-dark-thin">{formatDate(comment?.createdAt)}</p>
           <p className="text-dark-soft font-opensans my-2 text-[0.95rem] md:text-base lg:text-lg">
             {comment?.parent && (
               <span className="text-primary">@{comment.parent.name}</span>

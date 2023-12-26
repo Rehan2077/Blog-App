@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { signup } from "../../services/index/userSignup";
 import toast from "react-hot-toast";
+import { signup } from "../../services/index/users";
 
 const Register = () => {
-
   const navigate = useNavigate();
-    
+
   const { mutate, isLoading } = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
@@ -42,8 +41,6 @@ const Register = () => {
     const { name, email, password } = data;
     mutate({ name, email, password });
   };
-
-
 
   return (
     <section className="container mx-auto px-5 py-5 lg:py-10">

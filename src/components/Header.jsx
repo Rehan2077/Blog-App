@@ -4,7 +4,7 @@ import { images } from "../constants";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiArrowDownSLine, RiCloseLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../services/index/userLogout";
+import { logout } from "../services/index/users";
 
 const Header = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
@@ -13,9 +13,13 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [isLogout, setIsLogout] = useState(false);
+
   const handleLogOut = () => {
-      dispatch(logout());
-      navigate("/");
+    setIsLogout(true);
+    dispatch(logout());
+    navigate("/");
+    setIsLogout(false);
   };
 
   return (
@@ -91,19 +95,19 @@ const Header = () => {
                 <ol>
                   <li className="relative group">
                     <Link to={""}>
-                      <span className="flex items-center gap-1 ml-3 lg:m-0 border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg">
-                        PROFILE <RiArrowDownSLine />
+                      <span className="flex items-center gap-1 ml-3 lg:m-0 border-2 px-3 py-1 w-[100px] text-[0.95rem] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg">
+                        ACCOUNT <RiArrowDownSLine />
                       </span>
                     </Link>
                     <ol
                       className={`text-md absolute left-[7.3rem] -bottom-[20px] lg:top-7 lg:pt-6 lg:-left-3 group-hover:block w-28 lg:w-32 hidden rounded-xl `}
                     >
-                      <Link to={""}>
+                      <Link to={"/profile"}>
                         <li
                           className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl`}
                           onClick={navVisiblitiyHandler}
                         >
-                          DASHBOARD
+                          PROFILE
                         </li>
                       </Link>
                       <Link onClick={handleLogOut}>
@@ -111,7 +115,7 @@ const Header = () => {
                           className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-red-600 lg:pl-3 rounded-b-xl`}
                           onClick={navVisiblitiyHandler}
                         >
-                          LOG OUT
+                          <button disabled={isLogout}>LOG OUT</button>
                         </li>
                       </Link>
                     </ol>
