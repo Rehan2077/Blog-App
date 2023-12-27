@@ -4,6 +4,7 @@ import { VscVerified } from "react-icons/vsc";
 
 import { images } from "../../constants";
 import { formatDate } from "../../utils/formatDate";
+import { useEffect } from "react";
 
 const Profile = () => {
   //   const { mutate, isLoading } = useMutation({
@@ -21,7 +22,7 @@ const Profile = () => {
   //   });
 
   const { userInfo } = useSelector((state) => state.user);
-
+  console.log(userInfo);
   const navigate = useNavigate();
   const joinedDate = formatDate(userInfo?.createdAt);
   const formattedDate = new Date(joinedDate).toLocaleDateString("en-US", {
@@ -29,6 +30,10 @@ const Profile = () => {
     day: "numeric",
     year: "numeric",
   });
+
+  useEffect(() => {
+    if (!userInfo) navigate("/");
+  }, [navigate, userInfo]);
 
   return (
     <section className="container mx-auto px-5 py-5 lg:py-10">
@@ -48,8 +53,7 @@ const Profile = () => {
             <div className="flex flex-col items-center">
               <div className="flex gap-1 items-center justify-center text-dark-hard text-2xl font-bold">
                 {userInfo?.name}{" "}
-                <VscVerified className="text-primary text-xl" />
-                {/* {userInfo?.verified && <VscVerified className="text-primary " />} */}
+                {userInfo?.verified && <VscVerified className="text-primary text-xl" />}
               </div>
               <div className="tracking-normal font-mono">{userInfo?._id}</div>
             </div>
@@ -67,7 +71,7 @@ const Profile = () => {
                   Joined:{" "}
                   <span className="font-normal text-dark-thin">
                     {" "}
-                    {formattedDate}
+                    {formattedDate ? formattedDate : joinedDate}
                   </span>
                 </div>
               </div>

@@ -27,7 +27,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch,
   } = useForm({
     defaultValues: {
       email: "",
@@ -36,10 +35,9 @@ const Login = () => {
     mode: "onChange",
   });
 
-  const password = watch("password");
-
   const submitHandler = (data) => {
-    const { email, password } = data;
+    let { email, password } = data;
+    email = email.toLowerCase();
     mutate({ email, password });
   };
 

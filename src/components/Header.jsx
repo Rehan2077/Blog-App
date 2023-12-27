@@ -13,13 +13,9 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [isLogout, setIsLogout] = useState(false);
-
   const handleLogOut = () => {
-    setIsLogout(true);
     dispatch(logout());
     navigate("/");
-    setIsLogout(false);
   };
 
   return (
@@ -115,14 +111,14 @@ const Header = () => {
                           className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-red-600 lg:pl-3 rounded-b-xl`}
                           onClick={navVisiblitiyHandler}
                         >
-                          <button disabled={isLogout}>LOG OUT</button>
+                          <button>LOG OUT</button>
                         </li>
                       </Link>
                     </ol>
                   </li>
                 </ol>
               ) : (
-                <Link to={"/register"}>
+                <Link to={"/login"}>
                   <button
                     className="border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg"
                     onClick={navVisiblitiyHandler}

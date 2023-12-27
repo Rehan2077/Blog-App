@@ -35,7 +35,8 @@ export const logout = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/api/v1/users/logout");
     dispatch(clearUserInfo());
-    toast.success(data.message);
+    toast.success(data.message)
+    return data;
   } catch (error) {
     if (error.response && error.response.data.message) {
       toast.error(error.response.data.message);
@@ -46,12 +47,13 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-export const update = async ({ name, email, password }) => {
+export const updateProfile = async ({ name, email, password, newpassword }) => {
   try {
-    const { data } = await axios.post("/api/v1/users/register", {
+    const { data } = await axios.put("/api/v1/users/updateprofile", {
       name,
       email,
       password,
+      newpassword,
     });
     return data;
   } catch (error) {

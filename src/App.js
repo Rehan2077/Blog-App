@@ -20,10 +20,8 @@ const App = () => {
     axios
       .get("/api/v1/users/profile")
       .then((res) => dispatch(setUserInfo(res.data.user)))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   });
-
-
 
   return (
     <>

@@ -38,7 +38,8 @@ const Register = () => {
   const password = watch("password");
 
   const submitHandler = (data) => {
-    const { name, email, password } = data;
+    let { name, email, password } = data;
+    email = email.toLowerCase();
     mutate({ name, email, password });
   };
 
@@ -144,7 +145,7 @@ const Register = () => {
                 errors?.confirmPassword && "border-red-500 outline-none"
               }`}
               type="password"
-              placeholder="Enter confirm password"
+              placeholder="Confirm password"
               id="confirmPassword"
               name="confirmPassword"
             />
