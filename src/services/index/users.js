@@ -35,7 +35,7 @@ export const logout = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/api/v1/users/logout");
     dispatch(clearUserInfo());
-    toast.success(data.message)
+    toast.success(data.message);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -49,12 +49,30 @@ export const logout = () => async (dispatch) => {
 
 export const updateProfile = async ({ name, email, password, newpassword }) => {
   try {
-    const { data } = await axios.put("/api/v1/users/updateprofile", {
+    const { data } = await axios.put("/api/v1/users/updateProfile", {
       name,
       email,
       password,
       newpassword,
     });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const updatePhoto = async (formdata) => {
+  try {
+    const { data } = await axios.put(
+      "/api/v1/users/updateProfilePicture", formdata,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

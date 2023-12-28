@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { VscVerified } from "react-icons/vsc";
 
-import { images } from "../../constants";
 import { formatDate } from "../../utils/formatDate";
 import { useEffect } from "react";
+import ProfilePicture from "../../components/ProfilePicture";
 
 const Profile = () => {
   //   const { mutate, isLoading } = useMutation({
@@ -22,7 +22,7 @@ const Profile = () => {
   //   });
 
   const { userInfo } = useSelector((state) => state.user);
-  console.log(userInfo);
+  // console.log(userInfo);
   const navigate = useNavigate();
   const joinedDate = formatDate(userInfo?.createdAt);
   const formattedDate = new Date(joinedDate).toLocaleDateString("en-US", {
@@ -42,13 +42,7 @@ const Profile = () => {
           Profile
         </h1>
         <div className="flex flex-col items-center gap-1 mx-4 tracking-wide">
-          <div>
-            <img
-              className="h-32 w-32 rounded-full"
-              src={userInfo?.avatar ? userInfo?.avatar : images.User}
-              alt="profile"
-            />
-          </div>
+          <ProfilePicture photo={userInfo?.avatar} />
           <div className="flex flex-col gap-3">
             <div className="flex flex-col items-center">
               <div className="flex gap-1 items-center justify-center text-dark-hard text-2xl font-bold">

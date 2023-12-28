@@ -22,8 +22,8 @@ const Header = () => {
     <section className="shadow-md sticky top-0 z-50 bg-white">
       <header className="container h-16 flex mx-auto p-5 justify-between items-center text-dark-soft">
         <div className="flex items-center -ml-3">
-          <img className="w-20 " src={images.Logo} alt="DEVBLOG" />
-          <span className="text-xl md:text-2xl font-semibold">DevBlog</span>
+          <Link to={"/"}><img className="w-20 " src={images.Logo} alt="DEVBLOG" /></Link>
+          <Link to={"/"}><span className="text-xl md:text-2xl font-semibold">DevBlog</span></Link>
         </div>
         <div
           className={`z-50 lg:hidden border py-1 px-2 active:border-gray-400 border-gray-600 rounded-xl`}
