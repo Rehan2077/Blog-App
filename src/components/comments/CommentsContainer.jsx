@@ -1,58 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { getCommentsData } from "../../data/comments";
+import React, { useState } from "react";
 import CommentsForm from "./CommentsForm";
 import Comment from "./Comment";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createComment, deleteComment, updateComment } from "../../services/index/comments";
+import toast from "react-hot-toast";
 
-const CommentsContainer = () => {
-  const [comments, setComments] = useState([]);
-  const mainComments = comments.filter((comment) => comment.parent === null);
-  const replyComments = comments.filter((comment) => comment.parent !== null);
+const CommentsContainer = ({ comments, loggedInUser, postId, postSlug }) => {
+  const queryClient = useQueryClient();
+
   const [affectedComment, setAffectedComment] = useState(null);
 
-  const loggedInUserId = "a";
-
-  console.log(comments);
-
-  useEffect(() => {
-    (async () => {
-      const commentData = await getCommentsData();
-      setComments(commentData);
-    })();
-  }, []);
+  const { mutate: mutateNewComment, isLoading: isLoadingNewComment } =
+    useMutation({
+      mutationFn: ({ desc, post, parent, replyOnUser }) => {
+        return createComment({ desc, post, parent, replyOnUser });
+      },
+      mutationKey: ["posts"],
+      onSuccess: (data) => {
+        toast.success("Comment will appear after verification");
+      },
+      onError: (error) => toast.error(error.message),
+    });
+  const { mutate: mutateUpdateComment } =
+    useMutation({
+      mutationFn: ({ desc, commentId }) => {
+        return updateComment({ desc, commentId });
+      },
+      mutationKey: ["comment"],
+      onSuccess: (data) => {
+        toast.success("Comment updated successfully");
+        queryClient.invalidateQueries({queryKey: ["post"]});
+      },
+      onError: (error) => toast.error(error.message),
+    });
+  const { mutate: mutateDeleteComment } =
+    useMutation({
+      mutationFn: ({ commentId }) => {
+        return deleteComment({ commentId });
+      },
+      mutationKey: ["comments"],
+      onSuccess: (data) => {
+        toast.success("Comment deleted successfully");
+        queryClient.invalidateQueries({queryKey: ["post"]});
+      },
+      onError: (error) => toast.error(error.message),
+    });
 
   const addCommentHandler = (comment, parent = null, replyOnUser = null) => {
-    const newComment = {
-      _id: Date.now(),
-      user: {
-        _id: "a",
-        name: "Aditi",
-      },
-      desc: comment,
-      post: "1",
-      parent: parent,
-      replyOnUser: replyOnUser,
-      createdAt: "2022-12-31T17:22:05.092+0000",
-    };
-    setComments((prev) => [...prev, newComment]);
+    mutateNewComment({ desc: comment, post: postId, parent, replyOnUser });
     setAffectedComment(null);
   };
 
   const updateCommentHandler = (value, commentId) => {
-    const updatedComments = comments.map((comment) => {
-      if (comment._id === commentId) {
-        return { ...comment, desc: value };
-      }
-      return comment;
-    });
-    setComments(updatedComments);
+    mutateUpdateComment({desc: value, commentId})
     setAffectedComment(null);
   };
 
   const deleteCommentHandler = (commentId) => {
-    const updatedComments = comments.filter(
-      (comment) => comment._id !== commentId
-    );
-    setComments(updatedComments);
+    mutateDeleteComment({commentId})
     setAffectedComment(null);
   };
 
@@ -60,25 +65,27 @@ const CommentsContainer = () => {
     <div className={`mt-10 lg:mb-10`}>
       <CommentsForm
         btnLabel={"Submit"}
+        loggedInUser={loggedInUser}
+        loading = {isLoadingNewComment}
         formSubmitHandler={(comment) => addCommentHandler(comment)}
       />
       <h2 className="text-lg text-dark-hard mt-7 font-roboto font-[450] lg:text-xl">
         All Comments ({comments.length})
       </h2>
       <div className="space-y-4 mt-4">
-        {mainComments.map((comment) => (
+        {comments.map((comment) => (
           <Comment
-          classname="p-3"
+            classname="p-3"
             key={comment._id}
             comment={comment}
-            loggedInUserId={loggedInUserId}
+            loggedInUser={loggedInUser}
             affectedComment={affectedComment}
             setAffectedComment={setAffectedComment}
             addComment={addCommentHandler}
             deleteComment={deleteCommentHandler}
-            parentId={""}
+            parentId={comment._id}
             updateComment={updateCommentHandler}
-            replyComments={replyComments}
+            replyComments={comment.replies}
           />
         ))}
       </div>

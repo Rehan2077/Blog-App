@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { images, stables } from "../../../constants";
 
 const SuggestedPosts = ({ classname, header, posts = [], tags=[] }) => {
   return (
@@ -10,18 +11,20 @@ const SuggestedPosts = ({ classname, header, posts = [], tags=[] }) => {
         {header}
       </h2>
       <div className="flex flex-col mt-5 md:flex-row md:gap-5 md:flex-wrap md:justify-between lg:flex-nowrap lg:flex-col">
-        {posts?.map((item, index) => (
+        {posts?.map((post) => (
           <div
-            key={index}
+            key={post._id}
             className="flex gap-3 items-center  my-2 hover:border-primary border rounded-lg p-2 transition-all ease-linear md:w-[21rem] lg:w-full"
           >
-            <img src={item.image} className="w-12 md:w-16 rounded-lg " alt="" />
+            <img src={post?.photo
+              ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
+              : images.PostPlaceholder} className="w-12 md:w-16 rounded-lg " alt="" />
             <div className="flex flex-col">
               <h3 className="text-sm font-[450] md:text-base lg:text-lg xl:text-xl text-dark-soft ">
-                {item.title}
+                <Link to={`/article/${post.slug}`}>{post.title}</Link>
               </h3>
               <span className="text-xs md:text-[0.8rem] lg:text-base text-dark-thin mt-1 font-thin">
-                {new Date(item.createdAt).toLocaleDateString("en-US", {
+                {new Date(post.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "2-digit",

@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "./store/reducers/user";
 import Profile from "./pages/profile/Profile";
 import UpdateProfile from "./pages/profile/UpdateProfile";
+import Article from "./pages/article/Article";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const App = () => {
     axios
       .get("/api/v1/users/profile")
       .then((res) => dispatch(setUserInfo(res.data.user)))
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err.message))
   });
 
   return (
@@ -29,7 +30,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route index path="/" element={<Home />} />
-          <Route path="/article" element={<ArticlePage />} />
+          <Route index path="/article" element={<Article />} />
+          <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />

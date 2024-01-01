@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const CommentsForm = ({
   btnLabel,
   commentText = "",
   formSubmitHandler,
   formCancelHandler = null,
+  loggedInUser = null,
+  loading=false,
 }) => {
   const [comment, setComment] = useState(commentText);
   const submitHandler = (e) => {
     e.preventDefault();
+    if (loggedInUser === null) {
+      toast.error("You must be logged in to comment");
+      return;
+    }
     if (comment && comment.length > 0) {
       formSubmitHandler(comment);
       setComment("");
@@ -41,7 +48,8 @@ const CommentsForm = ({
             </button>
             <button
               type="submit"
-              className="px-1 py-1 md:px-3 md:py-2 m-1 md:m-2  bg-primary rounded-lg text-white hover:bg-blue-700 transition-all ease-linear"
+              disabled={loading}
+              className="px-1 py-1 md:px-3 md:py-2 m-1 md:m-2 disabled:opacity-7 0 bg-primary rounded-lg text-white hover:bg-blue-700 transition-all ease-linear"
             >
               {btnLabel}
             </button>

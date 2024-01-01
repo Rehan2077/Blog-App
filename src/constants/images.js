@@ -10,6 +10,7 @@ import TGLogo from "../assets/images/telegram.png";
 import IGLogo from "../assets/images/instagram.png";
 import TWLogo from "../assets/images/twitter.png";
 import User from "../assets/images/user.png";
+import PostPlaceholder from "../assets/images/post_placeholder.png";
 
 const images = {
   Logo,
@@ -24,6 +25,7 @@ const images = {
   TWLogo,
   WALogo,
   User,
+  PostPlaceholder,
 };
 
 export default images;

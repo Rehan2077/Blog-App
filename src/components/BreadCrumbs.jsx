@@ -6,7 +6,12 @@ const BreadCrumbs = ({ data }) => {
     <div className="flex items-center py-4 md:pt-2 lg:pb-1 overflow-x-auto whitespace-nowrap text-black opacity-50 text-sm md:font-roboto lg:text-base">
       {data.map((item, index) => (
         <div key={index} className="flex">
-          <Link to={item.link}>{item.name}</Link>
+          {index !== data.length - 1 ? (
+            <Link to={item.link}>{item.name}</Link>
+          ) : (
+            <span className="cursor-pointer">{item.name}</span>
+          )}
+
           {index !== data.length - 1 && <span className="px-2">/</span>}
         </div>
       ))}

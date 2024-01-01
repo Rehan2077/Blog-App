@@ -3,8 +3,12 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { FaFacebook, FaGithub, FaInstagram, FaYoutube } from "react-icons/fa";
 
 import { images } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+
+  const navigate = useNavigate();
+
   return (
     <section className="bg-gray-900">
       <footer className="container mx-auto px-5 grid grid-cols-10 gap-x-7  md:gap-x-10 gap-y-10 py-10 xl:grid-cols-12 xl:gap-x-10">
@@ -56,13 +60,13 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-span-10 md:order-first md:col-span-4 md:-mt-4 lg:col-span-4 lg:row-start-1">
-          <div className="flex items-center justify-center md:justify-start ">
+          <div onClick={()=>navigate("/")} className="flex items-center justify-center md:justify-start ">
             <img
               src={images.Logo}
-              className="w-[70px] h-auto -ml-5 md:-ml-3"
+              className="w-[70px] h-auto -ml-5 md:-ml-3 cursor-pointer"
               alt="DevBlog"
             />
-            <span className="text-gray-100 font-bold text-lg md:text-xl">
+            <span className="text-gray-100 font-bold text-lg md:text-xl cursor-pointer">
               DevBlog
             </span>
           </div>
