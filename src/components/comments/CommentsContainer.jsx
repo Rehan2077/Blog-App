@@ -29,7 +29,7 @@ const CommentsContainer = ({ comments, loggedInUser, postId, postSlug }) => {
       mutationKey: ["comment"],
       onSuccess: (data) => {
         toast.success("Comment updated successfully");
-        queryClient.invalidateQueries({queryKey: ["post"]});
+        queryClient.invalidateQueries({queryKey: ["post", postSlug]});
       },
       onError: (error) => toast.error(error.message),
     });

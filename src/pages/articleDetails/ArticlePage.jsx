@@ -28,7 +28,7 @@ const ArticlePage = () => {
 
   const { data, isLoading, } = useQuery({
     queryFn: () => getSinglePost(slug),
-    queryKey: ["post"],
+    queryKey: ["post", slug],
     onError: (err) => {
       toast.error(err.message);
       console.log(err);
