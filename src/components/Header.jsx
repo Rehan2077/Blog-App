@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { images } from "../constants";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiArrowDownSLine, RiCloseLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../services/index/users";
 
 const Header = () => {
@@ -19,52 +19,72 @@ const Header = () => {
   };
 
   return (
-    <section className="shadow-md sticky top-0 z-50 bg-white">
-      <header className="container h-16 flex mx-auto p-5 justify-between items-center text-dark-soft">
-        <div className="flex items-center -ml-3">
-          <Link to={"/"}><img className="w-20 " src={images.Logo} alt="DEVBLOG" /></Link>
-          <Link to={"/"}><span className="text-xl md:text-2xl font-semibold">DevBlog</span></Link>
+    <section className="sticky top-0 z-50 bg-white shadow-md">
+      <header className="container mx-auto flex h-16 items-center justify-between p-5 text-dark-soft">
+        <div className="-ml-3 flex items-center">
+          <Link to={"/"}>
+            <img className="w-20 " src={images.Logo} alt="DEVBLOG" />
+          </Link>
+          <Link to={"/"}>
+            <span className="text-xl font-semibold md:text-2xl">DevBlog</span>
+          </Link>
         </div>
         <div
-          className={`z-50 lg:hidden border py-1 px-2 active:border-gray-400 border-gray-600 rounded-xl`}
+          className={`z-50 rounded-xl border border-gray-600 px-2 py-1 active:border-gray-400 lg:hidden`}
           onClick={navVisiblitiyHandler}
         >
           {navIsVisible ? (
-            <RiCloseLine className="w-6 h-6" />
+            <RiCloseLine className="h-6 w-6" />
           ) : (
-            <RxHamburgerMenu className="w-6 h-6" />
+            <RxHamburgerMenu className="h-6 w-6" />
           )}
         </div>
         <div
           className={` ${
             navIsVisible ? "right-0" : "-right-full"
-          } transition-all duration-300 mt-16 text-white lg:text-dark-soft lg:mt-0 bg-dark-hard  lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0  lg:static`}
+          } fixed bottom-0 top-0 z-[49] mt-16 flex w-full  flex-col justify-center bg-dark-hard text-white transition-all duration-300 lg:static lg:mt-0 lg:w-auto lg:flex-row lg:justify-end lg:bg-transparent  lg:text-dark-soft`}
         >
           <ol
-            className={`flex flex-col lg:flex-row gap-12 font-semibold items-center mr-5`}
+            className={`mr-5 flex flex-col items-center gap-12 font-semibold lg:flex-row`}
           >
             <li
-              className="hover:text-primary transition-colors ease-linear"
+              className="transition-colors ease-linear hover:text-primary"
               onClick={navVisiblitiyHandler}
             >
-              <Link to={""}>HOME</Link>
+              <NavLink
+                style={({ isActive }) => ({
+                  color: isActive ? "#1565D8" : "#183B56",
+                  fontWeight: isActive ? "700" : "600",
+                })}
+                to={"/"}
+              >
+                HOME
+              </NavLink>
             </li>
             <li
-              className="hover:text-primary transition-colors ease-linear"
+              className="transition-colors ease-linear hover:text-primary"
               onClick={navVisiblitiyHandler}
             >
-              <Link to={"article"}>ARTICLE</Link>
+              <NavLink
+                style={({ isActive }) => ({
+                  color: isActive ? "#1565D8" : "#183B56",
+                  fontWeight: isActive ? "700" : "600",
+                })}
+                to={"article"}
+              >
+                ARTICLE
+              </NavLink>
             </li>
-            <li className="relative group">
-              <Link to={""}>
-                <span className=" flex items-center gap-1 ml-3 lg:m-0 hover:text-primary hover:cursor-pointer transition-colors ease-linear">
+            <li className="group relative">
+              <span to={""}>
+                <span className=" ml-3 flex items-center gap-1 transition-colors ease-linear hover:cursor-pointer hover:text-primary lg:m-0">
                   PAGES <RiArrowDownSLine />
                 </span>
-              </Link>
-              <ol className="text-md  absolute left-[82px] -bottom-[20px]  lg:top-5 lg:pt-6 lg:-left-1  group-hover:block w-28 lg:w-32 hidden rounded-xl ">
+              </span>
+              <ol className="text-md  absolute -bottom-[20px] left-[82px]  hidden w-28 rounded-xl  group-hover:block lg:-left-1 lg:top-5 lg:w-32 lg:pt-6 ">
                 <Link to={""}>
                   <li
-                    className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl`}
+                    className={`w-full rounded-t-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
                     onClick={navVisiblitiyHandler}
                   >
                     ABOUT US
@@ -72,7 +92,7 @@ const Header = () => {
                 </Link>
                 <Link to={""}>
                   <li
-                    className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-b-xl `}
+                    className={`w-full rounded-b-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200 `}
                     onClick={navVisiblitiyHandler}
                   >
                     CONTACT US
@@ -80,35 +100,50 @@ const Header = () => {
                 </Link>
               </ol>
             </li>
-            <li
-              className="hover:text-primary transition-colors ease-linear"
+            <NavLink
+              style={({ isActive }) => ({
+                color: isActive ? "#1565D8" : "#183B56",
+                fontWeight: isActive ? "700" : "600",
+              })}
+              className="transition-colors ease-linear hover:text-primary"
               onClick={navVisiblitiyHandler}
+              to={"/faq"}
             >
               FAQ
-            </li>
+            </NavLink>
             <li>
               {userInfo ? (
                 <ol>
-                  <li className="relative group">
+                  <li className="group relative">
                     <Link to={""}>
-                      <span className="flex items-center gap-1 ml-3 lg:m-0 border-2 px-3 py-1 w-[100px] text-[0.95rem] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg">
+                      <span className="ml-3 flex w-[100px] items-center gap-1 rounded-3xl border-2 border-primary px-3 py-1 text-[0.95rem] text-primary transition-colors ease-linear hover:border-transparent hover:bg-primary hover:text-white hover:shadow-lg lg:m-0">
                         ACCOUNT <RiArrowDownSLine />
                       </span>
                     </Link>
                     <ol
-                      className={`text-md absolute left-[7.3rem] -bottom-[20px] lg:top-7 lg:pt-6 lg:-left-3 group-hover:block w-28 lg:w-32 hidden rounded-xl `}
+                      className={`text-md absolute -bottom-[20px] left-[7.3rem] hidden w-28 rounded-xl group-hover:block lg:-left-3 lg:top-7 lg:w-32 lg:pt-6 `}
                     >
                       <Link to={"/profile"}>
                         <li
-                          className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-primary lg:pl-3 rounded-t-xl`}
+                          className={`w-full rounded-t-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
                           onClick={navVisiblitiyHandler}
                         >
                           PROFILE
                         </li>
                       </Link>
+                      {userInfo?.admin && (
+                        <Link to={"/admin/dashboard"}>
+                          <li
+                            className={`w-full bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200 `}
+                            onClick={navVisiblitiyHandler}
+                          >
+                            ADMIN
+                          </li>
+                        </Link>
+                      )}
                       <Link onClick={handleLogOut}>
                         <li
-                          className={`pl-2 py-2 bg-gray-900 lg:bg-gray-100 lg:hover:bg-gray-200 text-center lg:text-left pr-2 w-full text-[0.9rem] hover:text-red-600 lg:pl-3 rounded-b-xl`}
+                          className={`w-full rounded-b-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-red-600 lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
                           onClick={navVisiblitiyHandler}
                         >
                           <button>LOG OUT</button>
@@ -120,7 +155,7 @@ const Header = () => {
               ) : (
                 <Link to={"/login"}>
                   <button
-                    className="border-2 px-4 py-1 w-[100px] hover:text-white hover:bg-primary transition-colors ease-linear rounded-3xl border-primary hover:border-transparent text-primary hover:shadow-lg"
+                    className="w-[100px] rounded-3xl border-2 border-primary px-4 py-1 text-primary transition-colors ease-linear hover:border-transparent hover:bg-primary hover:text-white hover:shadow-lg"
                     onClick={navVisiblitiyHandler}
                   >
                     SIGN IN

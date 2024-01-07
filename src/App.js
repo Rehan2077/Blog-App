@@ -13,6 +13,10 @@ import { setUserInfo } from "./store/reducers/user";
 import Profile from "./pages/profile/Profile";
 import UpdateProfile from "./pages/profile/UpdateProfile";
 import Article from "./pages/article/Article";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/components/AdminDashboard";
+import AdminComments from "./pages/admin/components/AdminComments";
+import AdminPosts from "./pages/admin/components/AdminPosts";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +25,7 @@ const App = () => {
     axios
       .get("/api/v1/users/profile")
       .then((res) => dispatch(setUserInfo(res.data.user)))
-      .catch((err) => console.log(err.message))
+      .catch((err) => console.log(err.message));
   });
 
   return (
@@ -35,7 +39,14 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/updateprofile" element={<UpdateProfile/>} />
+          <Route path="/updateprofile" element={<UpdateProfile />} />
+          <Route path="/admin" element={<AdminLayout />} >
+
+              <Route index path="dashboard" element={<AdminDashboard />} />
+              <Route path="comments" element={<AdminComments />} />
+              <Route path="posts" element={<AdminPosts />} />
+
+          </Route>
         </Routes>
         <Footer />
       </Router>

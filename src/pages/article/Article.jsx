@@ -7,15 +7,13 @@ import { useEffect } from "react";
 
 const Article = () => {
   const { data, isLoading } = useQuery({
-    queryFn: () => getAllPosts(),
+    queryFn: () => getAllPosts("", 20),
     queryKey: ["posts"],
     onError: (err) => {
       toast.error(err.message);
       console.log(err);
     },
   });
-
-  console.log(data?.posts);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -29,11 +27,11 @@ const Article = () => {
   });
 
   return (
-    <section className="container mx-auto flex flex-wrap md:gap-5 p-5">
-      <div className="flex gap-x-7 md:gap-x-10 xl:gap-x-7 2xl:gap-x-11 justify-center 2xl:justify-normal gap-y-10 flex-wrap">
+    <section className="container mx-auto flex flex-wrap p-5 md:gap-5">
+      <div className="flex flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
         {isLoading
           ? [...Array(4)].map((_, i) => <ArticleCardSkeleton key={i} />)
-          : data?.posts.map((post) => (
+          : data?.data?.posts.map((post) => (
               <ArticleCard key={post._id} post={post} />
             ))}
       </div>

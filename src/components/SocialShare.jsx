@@ -16,7 +16,7 @@ const SocialShare = ({ url, title }) => {
   return (
     <div className="flex mt-5 gap-2">
       <h2 className="text-lg lg:text-xl font-bold text-dark-hard ">
-        Share on:{" "}
+        Share on:
       </h2>
       <div className=" flex gap-4 ">
         <FacebookShareButton url={url} quote={title} hashtag="#article">

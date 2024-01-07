@@ -37,22 +37,24 @@ const Profile = () => {
 
   return (
     <section className="container mx-auto px-5 py-5 lg:py-10">
-      <div className="flex flex-col text-dark-soft mx-auto font-roboto">
-        <h1 className="text-center text-2xl xl:text-3xl font-bold mb-8">
+      <div className="mx-auto flex flex-col font-roboto text-dark-soft">
+        <h1 className="mb-8 text-center text-2xl font-bold xl:text-3xl">
           Profile
         </h1>
-        <div className="flex flex-col items-center gap-1 mx-4 tracking-wide">
+        <div className="mx-4 flex flex-col items-center gap-1 tracking-wide">
           <ProfilePicture photo={userInfo?.avatar} />
           <div className="flex flex-col gap-3">
             <div className="flex flex-col items-center">
-              <div className="flex gap-1 items-center justify-center text-dark-hard text-2xl font-bold">
+              <div className="flex items-center justify-center gap-1 text-2xl font-bold text-dark-hard">
                 {userInfo?.name}{" "}
-                {userInfo?.verified && <VscVerified className="text-primary text-xl" />}
+                {userInfo?.verified && (
+                  <VscVerified className="text-xl text-primary" />
+                )}
               </div>
-              <div className="tracking-normal font-mono">{userInfo?._id}</div>
+              <div className="font-mono tracking-normal">{userInfo?._id}</div>
             </div>
             <div
-              className={`flex flex-col lg:flex-row font-semibold gap-1 lg:gap-10 justify-between`}
+              className={`flex flex-col justify-between gap-1 font-semibold lg:flex-row lg:gap-10`}
             >
               <div>
                 <div>
@@ -75,7 +77,7 @@ const Profile = () => {
               </div>
             </div>
             <button
-              className="w-full lg:w-72 my-5 bg-primary mx-auto text-white py-3 hover:bg-blue-700 rounded-lg transition-all ease-linear"
+              className="mx-auto my-5 w-full rounded-lg bg-primary py-3 text-white transition-all ease-linear hover:bg-blue-700 lg:w-72"
               onClick={() => navigate("/updateprofile")}
             >
               Edit Profile

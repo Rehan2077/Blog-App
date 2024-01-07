@@ -50,18 +50,18 @@ const Login = () => {
 
   return (
     <section className="container mx-auto px-5 py-5 lg:py-10">
-      <div className="flex flex-col w-full max-w-sm mx-auto font-roboto">
-        <h1 className="text-center text-dark-soft text-2xl xl:text-3xl font-bold mb-8">
+      <div className="mx-auto flex w-full max-w-sm flex-col font-roboto">
+        <h1 className="mb-8 text-center text-2xl font-bold text-dark-soft xl:text-3xl">
           Login
         </h1>
-        <div className="flex flex-col gap-3 mx-4  tracking-wide">
+        <div className="mx-4 flex flex-col gap-3  tracking-wide">
           <form
             className="flex flex-col text-dark-thin"
             onSubmit={handleSubmit(submitHandler)}
             action="/register"
             method="post"
           >
-            <label className="pl-1 mb-1 text-sm" htmlFor="email">
+            <label className="mb-1 pl-1 text-sm" htmlFor="email">
               Email
             </label>
             <input
@@ -76,7 +76,7 @@ const Login = () => {
                   message: "Please enter your registered email",
                 },
               })}
-              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`mb-4 rounded-lg border px-3 py-2  text-dark-soft md:py-3 ${
                 errors?.email && "border-red-500 outline-none"
               }`}
               type="email"
@@ -85,18 +85,18 @@ const Login = () => {
               name="email"
             />
             {errors.email?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
+              <p className="-mt-3 mb-3 ml-1 text-[0.75rem] italic text-red-600 md:text-[0.8rem]">
                 {errors.email?.message}
               </p>
             )}
-            <label className="pl-1 mb-1 text-sm" htmlFor="password">
+            <label className="mb-1 pl-1 text-sm" htmlFor="password">
               Password
             </label>
             <input
               {...register("password", {
                 required: { value: true, message: "Password is required!" },
               })}
-              className={`py-2 md:py-3 px-3 mb-4 rounded-lg  text-dark-soft border ${
+              className={`mb-4 rounded-lg border px-3 py-2  text-dark-soft md:py-3 ${
                 errors?.password && "border-red-500 outline-none"
               }`}
               type="password"
@@ -105,29 +105,29 @@ const Login = () => {
               name="password"
             />
             {errors.password?.message && (
-              <p className="text-red-600 -mt-3 mb-3 text-[0.75rem] md:text-[0.8rem] italic ml-1">
+              <p className="-mt-3 mb-3 ml-1 text-[0.75rem] italic text-red-600 md:text-[0.8rem]">
                 {errors.password?.message}
               </p>
             )}
 
             <Link
               to={"$"}
-              className="w-fit text-sm text-primary hover:text-blue-700 font-semibold transition-all ease-linear "
+              className="w-fit text-sm font-semibold text-primary transition-all ease-linear hover:text-blue-700 "
             >
               Forgot password?
             </Link>
             <button
               type="submit"
               disabled={!isValid || isLoading}
-              className={`my-4 py-2 md:py-3 border-none cursor-pointer text-white hover:bg-blue-700 bg-primary rounded-lg font-semibold transition-all ease-linear disabled:opacity-50 disabled:hover:bg-primary disabled:cursor-not-allowed`}
+              className={`my-4 cursor-pointer rounded-lg border-none bg-primary py-2 font-semibold text-white transition-all ease-linear hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary md:py-3`}
             >
               Login
             </button>
-            <p className="text-dark-thin text-sm font-medium">
+            <p className="text-sm font-medium text-dark-thin">
               Don't have an account?
               <Link
                 to={"/register"}
-                className="pl-2 font-semibold text-primary hover:text-blue-700 transition-all ease-linear "
+                className="pl-2 font-semibold text-primary transition-all ease-linear hover:text-blue-700 "
               >
                 Register
               </Link>

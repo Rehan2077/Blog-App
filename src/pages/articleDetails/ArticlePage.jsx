@@ -19,14 +19,14 @@ import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { useSelector } from "react-redux";
 
-const tags = ["Learn", "JavaScript", "ChatGPT", "Entertainment", "UI/UX"];
+// const tags = ["Learn", "JavaScript", "ChatGPT", "Entertainment", "UI/UX"];
 
 const ArticlePage = () => {
   const { slug } = useParams();
   const [body, setBody] = useState(null);
-  const {userInfo} = useSelector(state=>state.user)
+  const { userInfo } = useSelector((state) => state.user);
 
-  const { data, isLoading, } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => getSinglePost(slug),
     queryKey: ["post", slug],
     onError: (err) => {
@@ -35,8 +35,8 @@ const ArticlePage = () => {
     },
   });
 
-  const { data: suggestedPostsData, } = useQuery({
-    queryFn: () => getAllPosts(),
+  const { data: suggestedPostsData } = useQuery({
+    queryFn: () => getAllPosts("", 5),
     queryKey: ["posts"],
   });
 
@@ -50,22 +50,22 @@ const ArticlePage = () => {
             Text,
             Bold,
             Italic,
-          ])
-        )
+          ]),
+        ),
       );
     }
   }, [data?.post?.body]);
 
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  
-    useEffect(()=>{
-      scrollToTop()
-    })
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  });
 
   const breadCrumbsData = [
     { name: "Home", link: "/" },
@@ -74,17 +74,14 @@ const ArticlePage = () => {
   ];
 
   const pageUrl = encodeURI(
-    `https://blog-app-gray-two.vercel.app/article/${slug}`
+    `https://blog-app-gray-two.vercel.app/article/${slug}`,
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
 
-  if (isLoading)
-    return (
-      <ArticleDetailsSkeleton />
-    );
+  if (isLoading) return <ArticleDetailsSkeleton />;
 
   return (
-    <section className="container mx-auto max-w-7xl flex flex-col px-5 py-5 lg:py-2 lg:flex-row lg:gap-5 ">
+    <section className="container mx-auto flex max-w-7xl flex-col px-5 py-5 lg:flex-row lg:gap-5 lg:py-2 ">
       <article className="flex-1 lg:w-2/3 ">
         <BreadCrumbs data={breadCrumbsData} />
         <img
@@ -93,10 +90,10 @@ const ArticlePage = () => {
               ? stables.UPLOAD_FOLDER_BASE_URL + data?.post?.photo
               : images.PostPlaceholder
           }
-          className="w-full mt-1 rounded-lg object-cover object-center h-auto md:aspect-video lg:h-[25rem] xl:h-[26rem]"
+          className="mt-1 h-auto w-full rounded-lg object-cover object-center md:aspect-video lg:h-[25rem] xl:h-[26rem]"
           alt="Laptop"
         />
-        <div className="flex gap-4 text-primary tracking-widest mt-3 lg:text-xl">
+        <div className="mt-3 flex gap-4 tracking-widest text-primary lg:text-xl">
           {data?.post?.category?.map((category) => (
             <Link key={category.name} to={`article?category=${category?.name}`}>
               {category.name}
@@ -104,20 +101,27 @@ const ArticlePage = () => {
           ))}
         </div>
 
-        <h2 className="text-dark-hard font-semibold font-roboto tracking-wide text-2xl my-3 lg:text-3xl xl:text-4xl">
+        <h2 className="my-3 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
           {data?.post?.title}
         </h2>
-        <div className="text-dark-soft opacity-90 leading-relaxed lg:mb-3 lg:text-lg">
+        <div className="leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
           {body}
         </div>
         <SocialShare url={pageUrl} title={title} />
-        <CommentsContainer postSlug={slug} comments={data?.post?.comments} postId={data?.post?._id} loggedInUser={userInfo} key={data?.post?._id} />
+        <CommentsContainer
+          postSlug={slug}
+          comments={data?.post?.comments}
+          postId={data?.post?._id}
+          loggedInUser={userInfo}
+          key={data?.post?._id}
+        />
       </article>
       <SuggestedPosts
         classname={""}
         header={"Latest Articles"}
-        posts={suggestedPostsData?.posts}
-        tags={tags}
+        currentPostTitle={data?.post?.title}
+        posts={suggestedPostsData?.data?.posts}
+        tags={data?.post?.tags}
       />
     </section>
   );

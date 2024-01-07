@@ -10,11 +10,11 @@ const Home = () => {
       top: 0,
       behavior: "smooth",
     });
-  }
+  };
 
-  useEffect(()=>{
-    scrollToTop()
-  })
+  useEffect(() => {
+    scrollToTop();
+  });
 
   return (
     <>

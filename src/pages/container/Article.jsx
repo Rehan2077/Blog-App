@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Article = () => {
   const { data, isLoading } = useQuery({
-    queryFn: () => getAllPosts(),
+    queryFn: () => getAllPosts("", 8),
     queryKey: ["posts"],
     onError: (err) => {
       toast.error(err.message);
@@ -18,16 +18,19 @@ const Article = () => {
   });
 
   return (
-    <section className="container mx-auto flex flex-wrap md:gap-5 px-5 ">
-      <div className="flex gap-x-7 md:gap-x-10 xl:gap-x-7 2xl:gap-x-11 justify-center 2xl:justify-normal gap-y-10 flex-wrap">
+    <section className="container mx-auto flex flex-wrap px-5 md:gap-5 ">
+      <div className="flex flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
         {isLoading
           ? [...Array(4)].map((_, i) => <ArticleCardSkeleton key={i} />)
-          : data?.posts.map((post) => (
+          : data?.data?.posts.map((post) => (
               <ArticleCard key={post._id} post={post} />
             ))}
       </div>
-      <div className="w-full m-10 flex justify-center">
-        <Link to={"/article"} className="flex w-max px-3 py-2 border-2 border-primary hover:border-transparent hover:bg-primary hover:text-white transition-all ease-linear items-center gap-2 text-primary font-semibold rounded-lg">
+      <div className="m-10 flex w-full justify-center">
+        <Link
+          to={"/article"}
+          className="flex w-max items-center gap-2 rounded-lg border-2 border-primary px-3 py-2 font-semibold text-primary transition-all ease-linear hover:border-transparent hover:bg-primary hover:text-white"
+        >
           <span>More articles</span> <FaArrowRight />
         </Link>
       </div>
