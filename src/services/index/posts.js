@@ -22,3 +22,14 @@ export const getSinglePost = async (slug) => {
   }
 };
 
+export const deletePost = async (slug) => {
+  try {
+    const { data } = await axios.delete(`/api/v1/posts/${slug}`);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+

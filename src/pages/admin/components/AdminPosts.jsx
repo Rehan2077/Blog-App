@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { images, stables } from "../../../constants";
-import { getAllPosts } from "../../../services/index/posts";
-import { useQuery } from "@tanstack/react-query";
+import { deletePost, getAllPosts } from "../../../services/index/posts";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { formatDate } from "../../../utils/formatDate";
+import Pagination from "../../../components/Pagination";
+import toast from "react-hot-toast";
+import { MdDelete, MdEdit, MdRemoveRedEye } from "react-icons/md";
+
+let isFirstVisited = true;
 
 const AdminPosts = () => {
+  const queryClient = useQueryClient();
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,12 +26,37 @@ const AdminPosts = () => {
     queryKey: ["posts"],
   });
 
+  const { mutate: mutateDeletePost, isLoading: isLoadingDeletePost } =
+    useMutation({
+      mutationFn: ({ slug }) => {
+        return deletePost(slug);
+      },
+      mutationKey: ["comments"],
+      onSuccess: (data) => {
+        toast.success("Post deleted successfully");
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
+      },
+      onError: (error) => toast.error(error.message),
+    });
+
+  const deletePostHandler = (slug) => {
+    mutateDeletePost({slug});
+  };
+
   const filterPostHandler = (e) => {
     e.preventDefault();
-    refetch();
-    setFilter("");
     setCurrentPage(1);
+    setFilter("");
+    refetch();
   };
+
+  useEffect(() => {
+    if (isFirstVisited) {
+      isFirstVisited = false;
+      return;
+    }
+    refetch();
+  }, [refetch, currentPage]);
 
   return (
     <div className="flex h-full w-full flex-col px-10 py-6 text-dark-hard">
@@ -151,76 +182,28 @@ const AdminPosts = () => {
                           </span>
                         </td>
                         <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-[0.85rem] lg:text-sm">
-                          <a
-                            href="/"
-                            className="text-indigo-600 hover:text-indigo-900"
+                          <div
+                            className={`flex justify-center gap-5 pr-4 text-lg text-dark-thin lg:text-xl xl:text-2xl`}
                           >
-                            Edit
-                          </a>
+                            <MdDelete onClick={()=>deletePostHandler(post?.slug)} className="transition-all ease-linear hover:cursor-pointer  hover:text-red-500" />
+                            <MdEdit className="transition-all ease-linear hover:cursor-pointer  hover:text-green-500" />
+                            <MdRemoveRedEye className="transition-all ease-linear hover:cursor-pointer  hover:text-blue-500" />
+                          </div>
                         </td>
                       </tr>
                     ))
                   )}
                 </tbody>
               </table>
-              <div className="xs:flex-row xs:justify-between flex flex-col items-center bg-white px-5 py-5">
-                <div className="flex items-center">
-                  <button
-                    type="button"
-                    className="w-full rounded-l-xl border bg-white p-4 text-base text-gray-600 hover:bg-gray-100"
-                  >
-                    <svg
-                      width="9"
-                      fill="currentColor"
-                      height="8"
-                      className=""
-                      viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"></path>
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full border-b border-t bg-white px-4 py-2 text-base text-indigo-500 hover:bg-gray-100 "
-                  >
-                    1
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full border bg-white px-4 py-2 text-base text-gray-600 hover:bg-gray-100"
-                  >
-                    2
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full border-b border-t bg-white px-4 py-2 text-base text-gray-600 hover:bg-gray-100"
-                  >
-                    3
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full border bg-white px-4 py-2 text-base text-gray-600 hover:bg-gray-100"
-                  >
-                    4
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full rounded-r-xl border-b border-r border-t bg-white p-4 text-base text-gray-600 hover:bg-gray-100"
-                  >
-                    <svg
-                      width="9"
-                      fill="currentColor"
-                      height="8"
-                      className=""
-                      viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              {!isLoading && (
+                <Pagination
+                  onPageChange={(page) => setCurrentPage(page)}
+                  currentPage={currentPage}
+                  totalPageCount={JSON.parse(
+                    postData?.headers?.["x-totalpagecount"],
+                  )}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -109,6 +109,7 @@ const ArticlePage = () => {
         </div>
         <SocialShare url={pageUrl} title={title} />
         <CommentsContainer
+        totalComments={data?.totalComments}
           postSlug={slug}
           comments={data?.post?.comments}
           postId={data?.post?._id}

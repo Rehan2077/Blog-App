@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createComment, deleteComment, updateComment } from "../../services/index/comments";
 import toast from "react-hot-toast";
 
-const CommentsContainer = ({ comments, loggedInUser, postId, postSlug }) => {
+const CommentsContainer = ({ comments, loggedInUser, postId, postSlug, totalComments=0 }) => {
   const queryClient = useQueryClient();
 
   const [affectedComment, setAffectedComment] = useState(null);
@@ -70,7 +70,7 @@ const CommentsContainer = ({ comments, loggedInUser, postId, postSlug }) => {
         formSubmitHandler={(comment) => addCommentHandler(comment)}
       />
       <h2 className="text-lg text-dark-hard mt-7 font-roboto font-[450] lg:text-xl">
-        All Comments: 
+        All Comments: {totalComments}
       </h2>
       <div className="space-y-4 mt-4">
         {comments.map((comment) => (
