@@ -16,4 +16,7 @@ export const theme = {
     },
   },
 };
-export const plugins = [];
+export const plugins = [
+  { "tailwindcss/nesting": "postcss-nesting" },
+  require("@tailwindcss/typography"),
+];

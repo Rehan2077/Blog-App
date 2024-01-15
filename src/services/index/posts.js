@@ -33,3 +33,27 @@ export const deletePost = async (slug) => {
   }
 };
 
+export const updatePost = async (updatedData, slug) => {
+  try {
+    const { data } = await axios.put(`/api/v1/posts/${slug}`, updatedData);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const createPost = async (postData) => {
+  try {
+    console.log(postData);
+    const { data } = await axios.post(`/api/v1/posts/`, postData);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+

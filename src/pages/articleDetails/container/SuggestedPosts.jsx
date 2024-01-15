@@ -5,10 +5,13 @@ import { images, stables } from "../../../constants";
 const SuggestedPosts = ({
   classname,
   header,
-  currentPostTitle = "",
+  currentPostId = "",
   posts = [],
   tags = [],
 }) => {
+
+  console.log(posts);
+
   return (
     <section
       className={`mb-5 mt-10 h-fit rounded-lg p-4  shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] lg:w-1/3 ${classname}`}
@@ -18,7 +21,7 @@ const SuggestedPosts = ({
       </h2>
       <div className="mt-5 flex flex-col md:flex-row md:flex-wrap md:justify-between md:gap-5 lg:flex-col lg:flex-nowrap">
         {posts?.map((post) => {
-          if (currentPostTitle === post?.title)
+          if (currentPostId === post?._id)
             return <div key={post?._id} className="hidden"></div>;
           return (
             <>
@@ -32,7 +35,7 @@ const SuggestedPosts = ({
                       ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
                       : images.PostPlaceholder
                   }
-                  className="w-12 rounded-lg md:w-16 "
+                  className="w-12 md:w-20 aspect-video rounded-lg"
                   alt=""
                 />
                 <div className="flex flex-col">

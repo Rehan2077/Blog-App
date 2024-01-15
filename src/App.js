@@ -17,6 +17,8 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/components/AdminDashboard";
 import AdminComments from "./pages/admin/components/AdminComments";
 import AdminPosts from "./pages/admin/components/AdminPosts";
+import EditPost from "./pages/admin/components/EditPost";
+import CreatePost from "./pages/admin/components/CreatePost";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,8 @@ const App = () => {
               <Route index path="dashboard" element={<AdminDashboard />} />
               <Route path="comments" element={<AdminComments />} />
               <Route path="posts" element={<AdminPosts />} />
+              <Route path="posts/edit/:slug" element={<EditPost />} />
+              <Route path="posts/create" element={<CreatePost />} />
 
           </Route>
         </Routes>

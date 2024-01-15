@@ -2,13 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import parse from "html-react-parser";
-import { generateHTML } from "@tiptap/react";
-import Bold from "@tiptap/extension-bold";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Italic from "@tiptap/extension-italic";
 
 import BreadCrumbs from "../../components/BreadCrumbs";
 import { images, stables } from "../../constants";
@@ -18,6 +11,8 @@ import SocialShare from "../../components/SocialShare";
 import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { useSelector } from "react-redux";
+import { parseJsonToHtml } from "../../utils/parseJsonToHtml";
+import Editor from "../../components/editor/Editor";
 
 // const tags = ["Learn", "JavaScript", "ChatGPT", "Entertainment", "UI/UX"];
 
@@ -26,7 +21,7 @@ const ArticlePage = () => {
   const [body, setBody] = useState(null);
   const { userInfo } = useSelector((state) => state.user);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost(slug),
     queryKey: ["post", slug],
     onError: (err) => {
@@ -40,21 +35,11 @@ const ArticlePage = () => {
     queryKey: ["posts"],
   });
 
-  useMemo(() => {
-    if (data?.post?.body) {
-      setBody(
-        parse(
-          generateHTML(data?.post?.body, [
-            Document,
-            Paragraph,
-            Text,
-            Bold,
-            Italic,
-          ]),
-        ),
-      );
-    }
-  }, [data?.post?.body]);
+  // useMemo(() => {
+  //   if (data?.post?.body) {
+  //     setBody(parseJsonToHtml(data?.post?.body));
+  //   }
+  // }, [data?.post?.body]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -104,12 +89,12 @@ const ArticlePage = () => {
         <h2 className="my-3 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
           {data?.post?.title}
         </h2>
-        <div className="leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
-          {body}
+        <div className=" leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
+            <Editor content={data?.post?.body} editable={false} />
         </div>
         <SocialShare url={pageUrl} title={title} />
         <CommentsContainer
-        totalComments={data?.totalComments}
+          totalComments={data?.totalComments}
           postSlug={slug}
           comments={data?.post?.comments}
           postId={data?.post?._id}
@@ -120,7 +105,7 @@ const ArticlePage = () => {
       <SuggestedPosts
         classname={""}
         header={"Latest Articles"}
-        currentPostTitle={data?.post?.title}
+        currentPostId={data?.post?._id}
         posts={suggestedPostsData?.data?.posts}
         tags={data?.post?.tags}
       />

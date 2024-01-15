@@ -15,7 +15,6 @@ const AdminLayout = () => {
     } 
   }, [navigate, userInfo]);
 
-  console.log(userInfo);
 
   return (
     <div className='flex flex-col lg:flex-row h-full w-full bg-gray-100'>

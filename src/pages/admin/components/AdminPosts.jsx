@@ -26,6 +26,8 @@ const AdminPosts = () => {
     queryKey: ["posts"],
   });
 
+  console.log(postData?.data);
+
   const { mutate: mutateDeletePost, isLoading: isLoadingDeletePost } =
     useMutation({
       mutationFn: ({ slug }) => {
@@ -40,7 +42,7 @@ const AdminPosts = () => {
     });
 
   const deletePostHandler = (slug) => {
-    mutateDeletePost({slug});
+    mutateDeletePost({ slug });
   };
 
   const filterPostHandler = (e) => {
@@ -63,9 +65,14 @@ const AdminPosts = () => {
       <div className="container">
         <div>
           <div className="mb-1 flex w-full flex-col items-center justify-between sm:mb-0 lg:flex-row">
-            <h2 className="text-2xl font-bold leading-tight text-dark-soft">
+            <h2 className="mb-3 lg:mb-0 text-2xl font-bold leading-tight text-dark-soft">
               Manage Posts
             </h2>
+            <Link to={"/admin/posts/create"}>
+              <button className="w-full uppercase rounded-lg bg-blue-100 py-2.5 px-5 text-sm font-semibold text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
+                Create Post
+              </button>
+            </Link>
             <div className="text-end">
               <form onSubmit={filterPostHandler}>
                 <div className="relative my-5 lg:my-0">
@@ -125,11 +132,11 @@ const AdminPosts = () => {
                         </div>
                       </td>
                     </tr>
-                  ) : postData?.data?.posts.length === 0 ? (
+                  ) : !postData?.data?.posts ? (
                     <tr>
                       <td colSpan={5}>
                         <div className="w-full bg-white py-10 text-center text-lg font-semibold">
-                          No such posts...
+                          No posts...
                         </div>
                       </td>
                     </tr>
@@ -185,8 +192,13 @@ const AdminPosts = () => {
                           <div
                             className={`flex justify-center gap-5 pr-4 text-lg text-dark-thin lg:text-xl xl:text-2xl`}
                           >
-                            <MdDelete onClick={()=>deletePostHandler(post?.slug)} className="transition-all ease-linear hover:cursor-pointer  hover:text-red-500" />
-                            <MdEdit className="transition-all ease-linear hover:cursor-pointer  hover:text-green-500" />
+                            <MdDelete
+                              onClick={() => deletePostHandler(post?.slug)}
+                              className="transition-all ease-linear hover:cursor-pointer  hover:text-red-500"
+                            />
+                            <Link to={`/admin/posts/edit/${post?.slug}`}>
+                              <MdEdit className="transition-all ease-linear hover:cursor-pointer  hover:text-green-500" />
+                            </Link>
                             <MdRemoveRedEye className="transition-all ease-linear hover:cursor-pointer  hover:text-blue-500" />
                           </div>
                         </td>
