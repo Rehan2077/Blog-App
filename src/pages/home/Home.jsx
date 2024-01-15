@@ -20,9 +20,6 @@ const Home = () => {
     <>
       <Hero />
       <Article />
-      {/* <div className='relative -top-52 z-10'>
-          <img src={images.Oval} alt="" />
-        </div> */}
       <CTA />
     </>
   );
