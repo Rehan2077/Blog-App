@@ -65,11 +65,11 @@ const AdminPosts = () => {
       <div className="container">
         <div>
           <div className="mb-1 flex w-full flex-col items-center justify-between sm:mb-0 lg:flex-row">
-            <h2 className="mb-3 lg:mb-0 text-2xl font-bold leading-tight text-dark-soft">
+            <h2 className="mb-3 text-2xl font-bold leading-tight text-dark-soft lg:mb-0">
               Manage Posts
             </h2>
             <Link to={"/admin/posts/create"}>
-              <button className="w-full uppercase rounded-lg bg-blue-100 py-2.5 px-5 text-sm font-semibold text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
+              <button className="w-full rounded-lg bg-blue-100 px-5 py-2.5 text-sm font-semibold uppercase text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
                 Create Post
               </button>
             </Link>
@@ -171,7 +171,9 @@ const AdminPosts = () => {
                         </td>
                         <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-[0.85rem] lg:text-sm">
                           <p className="whitespace-no-wrap text-gray-900">
-                            {post?.category}
+                            {post?.category && post?.category?.length > 0
+                              ? post?.category
+                              : "Uncategorized"}
                           </p>
                         </td>
                         <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-[0.85rem] lg:text-sm">

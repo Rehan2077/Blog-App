@@ -10,7 +10,6 @@ const SuggestedPosts = ({
   tags = [],
 }) => {
 
-  console.log(posts);
 
   return (
     <section

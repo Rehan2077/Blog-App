@@ -35,10 +35,9 @@ const Article = () => {
       <div className="flex flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
         {isLoading
           ? Array.from({ length: 4 }, (_, i) => <ArticleCardSkeleton key={i} />)
-          : data?.data?.posts.length > 0 &&
-            data?.data?.posts.map((post) => (
-              <ArticleCard key={post._id} post={post} />
-            ))}
+          : data?.data?.posts?.map((post) => (
+            <ArticleCard key={post._id} post={post} />
+          ))}
       </div>
     </section>
   );
