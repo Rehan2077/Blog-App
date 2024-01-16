@@ -8,7 +8,7 @@ import ArticleCardSkeleton from "../../components/skeleton/ArticleCardSkeleton";
 import { Link } from "react-router-dom";
 
 const Article = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading,  } = useQuery({
     queryFn: () => getAllPosts("", 8),
     queryKey: ["posts"],
     onError: (err) => {
@@ -22,7 +22,7 @@ const Article = () => {
       <div className="flex flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
         {isLoading
           ? [...Array(4)].map((_, i) => <ArticleCardSkeleton key={i} />)
-          : data?.data?.posts.map((post) => (
+          : data?.data?.posts?.map((post) => (
               <ArticleCard key={post._id} post={post} />
             ))}
       </div>
