@@ -3,7 +3,6 @@ import axios from "axios";
 export const getAllPosts = async (searchKeyword="", limit=10, page=1,) => {
   try {
     const { data, headers } = await axios.get(`/api/v1/posts/?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`);
-    console.log(data);
     return {data, headers};
   } catch (error) {
     if (error.response && error.response.data.message)

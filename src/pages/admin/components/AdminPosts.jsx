@@ -26,7 +26,6 @@ const AdminPosts = () => {
     queryKey: ["posts"],
   });
 
-  console.log(postData?.data);
 
   const { mutate: mutateDeletePost, isLoading: isLoadingDeletePost } =
     useMutation({
