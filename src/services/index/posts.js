@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'https://devblog-vw30.onrender.com'
+
 export const getAllPosts = async (searchKeyword="", limit=10, page=1,) => {
   try {
-    const { data, headers } = await axios.get(`/api/v1/posts/?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`);
+    const { data, headers } = await axios.get(`${url}/api/v1/posts/?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`);
     return {data, headers};
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -13,7 +15,7 @@ export const getAllPosts = async (searchKeyword="", limit=10, page=1,) => {
 
 export const getSinglePost = async (slug) => {
   try {
-    const { data } = await axios.get(`/api/v1/posts/${slug}`);
+    const { data } = await axios.get(`${url}/api/v1/posts/${slug}`);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
