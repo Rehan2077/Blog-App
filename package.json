@@ -1,7 +1,7 @@
 {
   "name": "devblog",
   "version": "0.1.0",
-  "proxy": "https://devblog-vw30.onrender.com/",
+  "proxy":"https://devblog-vw30.onrender.com",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
