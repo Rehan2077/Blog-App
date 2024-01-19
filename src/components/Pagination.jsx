@@ -4,7 +4,7 @@ import { usePagination, DOTS } from "../hooks/usePagination";
 const Pagination = ({
   currentPage,
   siblingCount = 1,
-  totalPageCount,
+  totalPageCount=1,
   onPageChange,
 }) => {
   const paginationRange = usePagination({

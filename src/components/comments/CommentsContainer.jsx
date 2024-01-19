@@ -2,18 +2,37 @@ import React, { useState } from "react";
 import CommentsForm from "./CommentsForm";
 import Comment from "./Comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createComment, deleteComment, updateComment } from "../../services/index/comments";
+import {
+  createComment,
+  deleteComment,
+  updateComment,
+} from "../../services/index/comments";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
-const CommentsContainer = ({ comments, loggedInUser, postId, postSlug, totalComments=0 }) => {
+const CommentsContainer = ({
+  comments,
+  loggedInUser,
+  postId,
+  postSlug,
+  totalComments = 0,
+}) => {
   const queryClient = useQueryClient();
+
+  const { userInfo } = useSelector((state) => state.user);
 
   const [affectedComment, setAffectedComment] = useState(null);
 
   const { mutate: mutateNewComment, isLoading: isLoadingNewComment } =
     useMutation({
       mutationFn: ({ desc, post, parent, replyOnUser }) => {
-        return createComment({ desc, post, parent, replyOnUser });
+        return createComment({
+          desc,
+          post,
+          parent,
+          replyOnUser,
+          token: userInfo.token,
+        });
       },
       mutationKey: ["posts"],
       onSuccess: (data) => {
@@ -21,30 +40,28 @@ const CommentsContainer = ({ comments, loggedInUser, postId, postSlug, totalComm
       },
       onError: (error) => toast.error(error.message),
     });
-  const { mutate: mutateUpdateComment } =
-    useMutation({
-      mutationFn: ({ desc, commentId }) => {
-        return updateComment({ desc, commentId });
-      },
-      mutationKey: ["comment"],
-      onSuccess: (data) => {
-        toast.success("Comment updated successfully");
-        queryClient.invalidateQueries({queryKey: ["post", postSlug]});
-      },
-      onError: (error) => toast.error(error.message),
-    });
-  const { mutate: mutateDeleteComment } =
-    useMutation({
-      mutationFn: ({ commentId }) => {
-        return deleteComment({ commentId });
-      },
-      mutationKey: ["comments"],
-      onSuccess: (data) => {
-        toast.success("Comment deleted successfully");
-        queryClient.invalidateQueries({queryKey: ["post"]});
-      },
-      onError: (error) => toast.error(error.message),
-    });
+  const { mutate: mutateUpdateComment } = useMutation({
+    mutationFn: ({ desc, commentId }) => {
+      return updateComment({ desc, commentId, token: userInfo.token });
+    },
+    mutationKey: ["comment"],
+    onSuccess: (data) => {
+      toast.success("Comment updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["post", postSlug] });
+    },
+    onError: (error) => toast.error(error.message),
+  });
+  const { mutate: mutateDeleteComment } = useMutation({
+    mutationFn: ({ commentId }) => {
+      return deleteComment({ commentId, token: userInfo.token });
+    },
+    mutationKey: ["comments"],
+    onSuccess: (data) => {
+      toast.success("Comment deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["post"] });
+    },
+    onError: (error) => toast.error(error.message),
+  });
 
   const addCommentHandler = (comment, parent = null, replyOnUser = null) => {
     mutateNewComment({ desc: comment, post: postId, parent, replyOnUser });
@@ -52,12 +69,12 @@ const CommentsContainer = ({ comments, loggedInUser, postId, postSlug, totalComm
   };
 
   const updateCommentHandler = (value, commentId) => {
-    mutateUpdateComment({desc: value, commentId})
+    mutateUpdateComment({ desc: value, commentId });
     setAffectedComment(null);
   };
 
   const deleteCommentHandler = (commentId) => {
-    mutateDeleteComment({commentId})
+    mutateDeleteComment({ commentId });
     setAffectedComment(null);
   };
 
@@ -66,13 +83,13 @@ const CommentsContainer = ({ comments, loggedInUser, postId, postSlug, totalComm
       <CommentsForm
         btnLabel={"Submit"}
         loggedInUser={loggedInUser}
-        loading = {isLoadingNewComment}
+        loading={isLoadingNewComment}
         formSubmitHandler={(comment) => addCommentHandler(comment)}
       />
-      <h2 className="text-lg text-dark-hard mt-7 font-roboto font-[450] lg:text-xl">
+      <h2 className="mt-7 font-roboto text-lg font-[450] text-dark-hard lg:text-xl">
         All Comments: {totalComments}
       </h2>
-      <div className="space-y-4 mt-4">
+      <div className="mt-4 space-y-4">
         {comments.map((comment) => (
           <Comment
             classname="p-3"

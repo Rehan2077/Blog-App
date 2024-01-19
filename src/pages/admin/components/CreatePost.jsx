@@ -5,11 +5,14 @@ import toast from "react-hot-toast";
 import Editor from "../../../components/editor/Editor";
 import { createPost } from "../../../services/index/posts";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
   const [photo, setPhoto] = useState(null);
   const [body, setBody] = useState(null);
   const [title, setTitle] = useState("");
+
+  const { userInfo } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -36,7 +39,7 @@ const CreatePost = () => {
     createdData.append("title", title);
     createdData.append("document", JSON.stringify({ body }));
     try {
-      const postData = await createPost(createdData);
+      const postData = await createPost({postData: createdData, token: userInfo.token});
       console.log(postData);
       toast.success(postData?.message);
       navigate(-1);
@@ -49,7 +52,7 @@ const CreatePost = () => {
   return (
     <section className="container mx-auto mt-5 flex max-w-7xl flex-col px-5 py-5 lg:flex-row lg:gap-5 lg:py-2 ">
       <article className="flex-1 lg:w-2/3 ">
-        <form onSubmit={handleCreatePost}>
+        <form onSubmit={e=>e.preventDefault()}>
           <label htmlFor="postPicture">
             {photo ? (
               <img

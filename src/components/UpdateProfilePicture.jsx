@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { images, stables } from "../constants";
 import CropEasy from "./crop/CropEasy";
 import { createPortal } from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { setUserInfo } from "../store/reducers/user";
 import { updatePhoto } from "../services/index/users";
@@ -18,11 +18,14 @@ const UpdateProfilePicture = ({ avatar }) => {
     setPortal(true);
   };
 
+  const {userInfo} = useSelector(state=>state.user)
+  const token = userInfo?.token;
+
   const dispatch = useDispatch();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => {
-      return updatePhoto(formData);
+      return updatePhoto(formData, token);
     },
     onSuccess: (data) => {
       toast.success(data.message);
@@ -49,8 +52,6 @@ const UpdateProfilePicture = ({ avatar }) => {
         console.log(error);
     }
   };
-
-  // console.log(stables.UPLOAD_FOLDER_BASE_URL + avatar);
 
   return (
     <>

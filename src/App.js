@@ -24,10 +24,20 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("/api/v1/users/profile")
-      .then((res) => dispatch(setUserInfo(res.data.user)))
-      .catch((err) => console.log(err.message));
+    try {
+      const token = localStorage.getItem("userInfo").replace(/['"]+/g, "");
+      if (!token) return;
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log(res.data);
+          dispatch(setUserInfo(res.data.user))
+        })
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   return (
@@ -42,14 +52,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/updateprofile" element={<UpdateProfile />} />
-          <Route path="/admin" element={<AdminLayout />} >
-
-              <Route index path="dashboard" element={<AdminDashboard />} />
-              <Route path="comments" element={<AdminComments />} />
-              <Route path="posts" element={<AdminPosts />} />
-              <Route path="posts/edit/:slug" element={<EditPost />} />
-              <Route path="posts/create" element={<CreatePost />} />
-
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index path="dashboard" element={<AdminDashboard />} />
+            <Route path="comments" element={<AdminComments />} />
+            <Route path="posts" element={<AdminPosts />} />
+            <Route path="posts/edit/:slug" element={<EditPost />} />
+            <Route path="posts/create" element={<CreatePost />} />
           </Route>
         </Routes>
         <Footer />

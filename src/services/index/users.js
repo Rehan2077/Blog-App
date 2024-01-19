@@ -2,9 +2,11 @@ import axios from "axios";
 import { clearUserInfo } from "../../store/reducers/user";
 import toast from "react-hot-toast";
 
+const url = process.env.REACT_APP_BACKEND_URL;
+
 export const signup = async ({ name, email, password }) => {
   try {
-    const { data } = await axios.post("/api/v1/users/register", {
+    const { data } = await axios.post(`${url}/api/v1/users/register`, {
       name,
       email,
       password,
@@ -19,7 +21,7 @@ export const signup = async ({ name, email, password }) => {
 
 export const signin = async ({ email, password }) => {
   try {
-    const { data } = await axios.post("/api/v1/users/login", {
+    const { data } = await axios.post(`${url}/api/v1/users/login`, {
       email,
       password,
     });
@@ -33,8 +35,9 @@ export const signin = async ({ email, password }) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("/api/v1/users/logout");
+    const { data } = await axios.get(`${url}/api/v1/users/logout`);
     dispatch(clearUserInfo());
+    localStorage.removeItem("userInfo");
     toast.success(data.message);
     return data;
   } catch (error) {
@@ -47,14 +50,24 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-export const updateProfile = async ({ name, email, password, newpassword }) => {
+export const updateProfile = async ({ userData, token }) => {
   try {
-    const { data } = await axios.put("/api/v1/users/updateProfile", {
-      name,
-      email,
-      password,
-      newpassword,
-    });
+    const { name, email, password, newpassword } = userData;
+
+    const { data } = await axios.put(
+      `${url}/api/v1/users/updateProfile`,
+      {
+        name,
+        email,
+        password,
+        newpassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -63,15 +76,17 @@ export const updateProfile = async ({ name, email, password, newpassword }) => {
   }
 };
 
-export const updatePhoto = async (formdata) => {
+export const updatePhoto = async (formdata, token) => {
   try {
     const { data } = await axios.put(
-      "/api/v1/users/updateProfilePicture", formdata,
+      `${url}/api/v1/users/updateProfilePicture`,
+      formdata,
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     return data;
   } catch (error) {

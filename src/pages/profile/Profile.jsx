@@ -7,22 +7,8 @@ import { useEffect } from "react";
 import ProfilePicture from "../../components/ProfilePicture";
 
 const Profile = () => {
-  //   const { mutate, isLoading } = useMutation({
-
-  //     mutationFn: update,
-  //     onSuccess: (data) => {
-  //       toast.success(data.message);
-  //       console.log(data);
-  //       navigate("/login");
-  //     },
-  //     onError: (error) => {
-  //       toast.error(error.message);
-  //       console.log(error);
-  //     },
-  //   });
-
   const { userInfo } = useSelector((state) => state.user);
-  // console.log(userInfo);
+
   const navigate = useNavigate();
   const joinedDate = formatDate(userInfo?.createdAt);
   const formattedDate = new Date(joinedDate).toLocaleDateString("en-US", {

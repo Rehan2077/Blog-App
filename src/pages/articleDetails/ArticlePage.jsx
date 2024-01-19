@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -11,14 +11,11 @@ import SocialShare from "../../components/SocialShare";
 import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { useSelector } from "react-redux";
-import { parseJsonToHtml } from "../../utils/parseJsonToHtml";
 import Editor from "../../components/editor/Editor";
 
-// const tags = ["Learn", "JavaScript", "ChatGPT", "Entertainment", "UI/UX"];
 
 const ArticlePage = () => {
   const { slug } = useParams();
-  const [body, setBody] = useState(null);
   const { userInfo } = useSelector((state) => state.user);
 
   const { data, isLoading, isError } = useQuery({
@@ -35,22 +32,6 @@ const ArticlePage = () => {
     queryKey: ["posts"],
   });
 
-  // useMemo(() => {
-  //   if (data?.post?.body) {
-  //     setBody(parseJsonToHtml(data?.post?.body));
-  //   }
-  // }, [data?.post?.body]);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    scrollToTop();
-  });
 
   const breadCrumbsData = [
     { name: "Home", link: "/" },
@@ -63,7 +44,7 @@ const ArticlePage = () => {
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
 
-  if (isLoading) return <ArticleDetailsSkeleton />;
+  if (isLoading || isError) return <ArticleDetailsSkeleton />;
 
   return (
     <section className="container mx-auto flex max-w-7xl flex-col px-5 py-5 lg:flex-row lg:gap-5 lg:py-2 ">

@@ -1,11 +1,12 @@
 import axios from "axios";
+const url = process.env.REACT_APP_BACKEND_URL;
 
-const url = 'https://devblog-vw30.onrender.com'
-
-export const getAllPosts = async (searchKeyword="", limit=10, page=1,) => {
+export const getAllPosts = async (searchKeyword = "", limit = 10, page = 1) => {
   try {
-    const { data, headers } = await axios.get(`${url}/api/v1/posts/?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`);
-    return {data, headers};
+    const { data, headers } = await axios.get(
+      `${url}/api/v1/posts/?searchKeyword=${searchKeyword}&limit=${limit}&page=${page}`,
+    );
+    return { data, headers };
   } catch (error) {
     if (error.response && error.response.data.message)
       throw new Error(error.response.data.message);
@@ -24,9 +25,14 @@ export const getSinglePost = async (slug) => {
   }
 };
 
-export const deletePost = async (slug) => {
+export const deletePost = async ({slug, token}) => {
   try {
-    const { data } = await axios.delete(`/api/v1/posts/${slug}`);
+    console.log(slug, token);
+    const { data } = await axios.delete(`${url}/api/v1/posts/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -35,9 +41,17 @@ export const deletePost = async (slug) => {
   }
 };
 
-export const updatePost = async (updatedData, slug) => {
+export const updatePost = async (updatedData, slug, token) => {
   try {
-    const { data } = await axios.put(`/api/v1/posts/${slug}`, updatedData);
+    const { data } = await axios.put(
+      `${url}/api/v1/posts/${slug}`,
+      updatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -46,10 +60,14 @@ export const updatePost = async (updatedData, slug) => {
   }
 };
 
-export const createPost = async (postData) => {
+export const createPost = async ({postData, token}) => {
   try {
-    console.log(postData);
-    const { data } = await axios.post(`/api/v1/posts/`, postData);
+    console.log(postData, token);
+    const { data } = await axios.post(`${url}/api/v1/posts/`, postData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -57,5 +75,3 @@ export const createPost = async (postData) => {
     throw new Error(error.message);
   }
 };
-
-

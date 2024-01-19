@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import Cropper from "react-easy-crop";
 
@@ -26,11 +26,14 @@ const CropEasy = ({ photo, setPortal }) => {
     setZoom(zoom);
   };
 
+  const {userInfo} = useSelector((state) => state.user);
+  const token = userInfo?.token;
+
   const dispatch = useDispatch();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => {
-      return updatePhoto(formData);
+      return updatePhoto(formData, token);
     },
     onSuccess: (data) => {
       toast.success(data.message);

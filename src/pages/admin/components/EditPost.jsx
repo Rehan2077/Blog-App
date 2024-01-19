@@ -35,7 +35,7 @@ const EditPost = () => {
   const { mutate: isMutateUpdatePost, isLoading: isUpdatePostLoading } =
     useMutation({
       mutationFn: ({ updatedData, slug }) => {
-        return updatePost(updatedData, slug);
+        return updatePost(updatedData, slug, userInfo.token);
       },
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ["post", slug] });

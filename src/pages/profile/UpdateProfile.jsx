@@ -16,10 +16,14 @@ const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: updateProfile,
+    mutationFn: ({ name, email, password, newpassword }) => {
+      return updateProfile({
+        userData: { name, email, password, newpassword },
+        token: userInfo.token,
+      });
+    },
     onSuccess: (data) => {
       toast.success(data.message);
-      console.log(data);
       dispatch(setUserInfo(data.user));
       navigate("/");
     },

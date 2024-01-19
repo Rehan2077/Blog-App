@@ -14,8 +14,8 @@ const Login = () => {
     mutationFn: signin,
     onSuccess: (data) => {
       toast.success(data.message);
-      console.log(data);
       dispatch(setUserInfo(data.user));
+      localStorage.setItem("userInfo", JSON.stringify(data.user.token));
     },
     onError: (error) => {
       toast.error(error.message);
