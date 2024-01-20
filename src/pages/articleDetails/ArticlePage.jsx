@@ -32,6 +32,16 @@ const ArticlePage = () => {
     queryKey: ["posts"],
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  });
 
   const breadCrumbsData = [
     { name: "Home", link: "/" },
