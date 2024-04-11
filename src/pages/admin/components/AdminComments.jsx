@@ -221,7 +221,7 @@ const AdminComments = () => {
                   )}
                 </tbody>
               </table>
-              {!isLoading && (
+              {/* {!isLoading && (
                 <Pagination
                   onPageChange={(page) => setCurrentPage(page)}
                   currentPage={currentPage}
@@ -229,7 +229,7 @@ const AdminComments = () => {
                     1 || JSON.parse(postData?.headers?.["x-totalpagecount"])
                   }
                 />
-              )}
+              )} */}
             </div>
           </div>
         </div>
