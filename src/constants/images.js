@@ -9,8 +9,9 @@ import WALogo from "../assets/images/whatsapp.png";
 import TGLogo from "../assets/images/telegram.png";
 import IGLogo from "../assets/images/instagram.png";
 import TWLogo from "../assets/images/twitter.png";
-import User from "../assets/images/user.png";
 import PostPlaceholder from "../assets/images/post_placeholder.png";
+import User from "../assets/images/user.png";
+import BlogImage from "../assets/images/Blog-image.png";
 
 const images = {
   Logo,
@@ -24,8 +25,9 @@ const images = {
   TGLogo,
   TWLogo,
   WALogo,
-  User,
   PostPlaceholder,
+  User,
+  BlogImage
 };
 
 export default images;

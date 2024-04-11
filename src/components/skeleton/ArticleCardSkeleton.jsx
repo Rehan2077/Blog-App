@@ -5,7 +5,7 @@ const ArticleCardSkeleton = ({ className="" }) => {
     >
       {/* image */}
       <div className="w-full aspect-video bg-slate-300" />
-      <div className="p-5">
+      <div className="p-5">                       
         {/* title */}
         <div className="w-56 h-2 mt-4 bg-slate-300 rounded-lg" />
         {/* caption */}

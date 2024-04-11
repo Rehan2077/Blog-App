@@ -32,7 +32,6 @@ const App = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          console.log(res.data);
           dispatch(setUserInfo(res.data.user))
         })
     } catch (error) {

@@ -25,7 +25,7 @@ const SuggestedPosts = ({
           return (
             <>
               <div
-                key={post._id}
+                key={post?._id}
                 className="my-1 flex items-center  gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary md:w-[21rem] lg:w-full"
               >
                 <img
@@ -34,7 +34,7 @@ const SuggestedPosts = ({
                       ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
                       : images.PostPlaceholder
                   }
-                  className="w-12 md:w-20 aspect-video rounded-lg"
+                  className="w-12 md:w-20 h-14 rounded-lg"
                   alt=""
                 />
                 <div className="flex flex-col">

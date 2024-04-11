@@ -9,6 +9,8 @@ import ProfilePicture from "../../components/ProfilePicture";
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
 
+  console.log(userInfo);
+
   const navigate = useNavigate();
   const joinedDate = formatDate(userInfo?.createdAt);
   const formattedDate = new Date(joinedDate).toLocaleDateString("en-US", {
@@ -58,8 +60,8 @@ const Profile = () => {
                 </div>
               </div>
               <div>
-                <div>Posts: null</div>
-                <div>Comments: null</div>
+                <div>Posts: {userInfo?.totalPosts || "null"}</div>
+                <div>Comments: {userInfo?.totalComments || "null"}</div>
               </div>
             </div>
             <button

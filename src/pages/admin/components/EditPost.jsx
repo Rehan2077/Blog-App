@@ -1,22 +1,21 @@
-import React, { useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import { HiOutlineCamera } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
-import {
-  getAllPosts,
-  getSinglePost,
-  updatePost,
-} from "../../../services/index/posts";
-import ArticleDetailsSkeleton from "../../../components/skeleton/ArticleDetailsSkeleton";
-import { images, stables } from "../../../constants";
 import SocialShare from "../../../components/SocialShare";
 import CommentsContainer from "../../../components/comments/CommentsContainer";
 import Editor from "../../../components/editor/Editor";
+import ArticleDetailsSkeleton from "../../../components/skeleton/ArticleDetailsSkeleton";
+import { stables } from "../../../constants";
+import { getSinglePost, updatePost } from "../../../services/index/posts";
+import { PostCategories } from "../../../utils/categoryTypes";
 
 const EditPost = () => {
+  const categories = PostCategories;
+
   const [photo, setPhoto] = useState(null);
   const [body, setBody] = useState(null);
   const { slug } = useParams();
@@ -47,20 +46,17 @@ const EditPost = () => {
     });
 
   const [initialPhoto, setInitialPhoto] = useState(data?.post?.photo);
+  const [category, setCategory] = useState(data?.post?.categories[0]);
+
+  console.log(category);
+
+  useEffect(() => {
+    setCategory(data?.post?.categories[0]);
+  }, [data?.post]);
 
   useMemo(() => {
     if (!isLoading && !isError) {
       setInitialPhoto(data?.post?.photo);
-      //     parse(
-      //       generateHTML(data?.post?.body, [
-      //         Document,
-      //         Paragraph,
-      //         Text,
-      //         Bold,
-      //         Italic,
-      //       ]),
-      //     ),
-      //   );
     }
   }, [data?.post?.body, data?.post?.photo]);
 
@@ -74,7 +70,15 @@ const EditPost = () => {
     if (photo) {
       updatedData.append("postPicture", photo);
     }
-    updatedData.append("document", JSON.stringify({ body }));
+    updatedData.append(
+      "document",
+      JSON.stringify({
+        body,
+        title: newTitle,
+        caption: newCaption,
+        categories: category,
+      }),
+    );
 
     isMutateUpdatePost({
       updatedData,
@@ -86,6 +90,9 @@ const EditPost = () => {
     `https://blog-app-gray-two.vercel.app/article/${slug}`,
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
+  const [newTitle, setNewTitle] = useState(data?.post?.title);
+
+  const [newCaption, setNewCaption] = useState(data?.post?.caption);
 
   if (isLoading) return <ArticleDetailsSkeleton />;
 
@@ -127,9 +134,38 @@ const EditPost = () => {
           ))}
         </div>
 
-        <h2 className="my-3 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
-          {data?.post?.title}
-        </h2>
+        <input
+          value={newTitle?.length > 0 ? newTitle : data?.post?.title}
+          onChange={(e) => setNewTitle(e.target.value)}
+          className="my-3 block w-full border-2 px-3 py-2 font-roboto text-2xl font-semibold tracking-wide text-dark-hard outline-none focus:border-primary  lg:text-3xl xl:text-4xl"
+        />
+        <input
+          value={newCaption?.length > 0 ? newCaption : data?.post?.caption}
+          onChange={(e) => setNewCaption(e.target.value)}
+          className="my-3 block w-full border-2 px-3 py-2 font-roboto text-xl  tracking-wide text-dark-hard outline-none focus:border-primary "
+        />
+
+        <label
+          htmlFor="category"
+          className="pl-0.5 font-semibold text-dark-soft"
+        >
+          Select Category:
+        </label>
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+          name="category"
+          id="category"
+          className="mb-2 rounded-lg border-2 border-slate-300 p-2"
+        >
+          O
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+
         <div className="leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
           {!isLoading && !isError && (
             <Editor

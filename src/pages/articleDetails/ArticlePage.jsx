@@ -12,7 +12,7 @@ import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { useSelector } from "react-redux";
 import Editor from "../../components/editor/Editor";
-
+import { formatDate } from "../../utils/formatDate";
 
 const ArticlePage = () => {
   const { slug } = useParams();
@@ -50,7 +50,7 @@ const ArticlePage = () => {
   ];
 
   const pageUrl = encodeURI(
-    `https://blog-app-gray-two.vercel.app/article/${slug}`,
+    `https://dev-blog-y0lw.onrender.com/article/${slug}`,
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
 
@@ -69,19 +69,41 @@ const ArticlePage = () => {
           className="mt-1 h-auto w-full rounded-lg object-cover object-center md:aspect-video lg:h-[25rem] xl:h-[26rem]"
           alt="Laptop"
         />
-        <div className="mt-3 flex gap-4 tracking-widest text-primary lg:text-xl">
-          {data?.post?.category?.map((category) => (
-            <Link key={category.name} to={`article?category=${category?.name}`}>
+        <div className="mt-3 flex gap-4 tracking-widest text-primary lg:text-xl uppercase">
+          <Link to={`/article?category=${data?.post?.categories[0]}`}>
+            {data?.post?.categories[0]}
+          </Link>
+          {/* {data?.post?.categories?.map((category) => (
+            <Link key={category.id} to={`article?category=${category?.name}`}>
               {category.name}
             </Link>
-          ))}
+          ))} */}
         </div>
 
-        <h2 className="my-3 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
+        <h2 className="my-2 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
           {data?.post?.title}
         </h2>
+        <div className="mb-1 flex items-center gap-1 pl-1">
+          <img
+            src={
+              data?.post?.author?.avatar
+                ? stables.UPLOAD_FOLDER_BASE_URL + data?.post?.author?.avatar
+                : images.User
+            }
+            alt="Author"
+            className="h-10 w-10 rounded-full"
+          />
+          <div>
+            <p className="tracking-wide text-dark-hard">
+              {data?.post?.author?.name}
+            </p>
+            <span className="text-sm italic text-dark-thin">
+              {formatDate(data?.post?.createdAt)}
+            </span>
+          </div>
+        </div>
         <div className=" leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
-            <Editor content={data?.post?.body} editable={false} />
+          <Editor content={data?.post?.body} editable={false} />
         </div>
         <SocialShare url={pageUrl} title={title} />
         <CommentsContainer

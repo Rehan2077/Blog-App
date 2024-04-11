@@ -6,11 +6,15 @@ import Editor from "../../../components/editor/Editor";
 import { createPost } from "../../../services/index/posts";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { PostCategories } from "../../../utils/categoryTypes";
 
 const CreatePost = () => {
+  const categories = PostCategories;
   const [photo, setPhoto] = useState(null);
   const [body, setBody] = useState(null);
+  const [caption, setCaption] = useState(null);
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Category");
 
   const { userInfo } = useSelector((state) => state.user);
 
@@ -32,14 +36,26 @@ const CreatePost = () => {
       return toast.error("Title is required");
     }
 
+    if (!caption || caption.length === 0) {
+      return toast.error("Caption is required");
+    }
+
     if (!body || body.length === 0) {
       return toast.error("Body is required");
     }
+    if (!category || category === "Category") {
+      return toast.error("Category is required");
+    }
 
     createdData.append("title", title);
+    createdData.append("caption", caption);
+    createdData.append("category", category);
     createdData.append("document", JSON.stringify({ body }));
     try {
-      const postData = await createPost({postData: createdData, token: userInfo.token});
+      const postData = await createPost({
+        postData: createdData,
+        token: userInfo.token,
+      });
       console.log(postData);
       toast.success(postData?.message);
       navigate(-1);
@@ -52,7 +68,7 @@ const CreatePost = () => {
   return (
     <section className="container mx-auto mt-5 flex max-w-7xl flex-col px-5 py-5 lg:flex-row lg:gap-5 lg:py-2 ">
       <article className="flex-1 lg:w-2/3 ">
-        <form onSubmit={e=>e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="postPicture">
             {photo ? (
               <img
@@ -77,13 +93,44 @@ const CreatePost = () => {
           />
           <input
             type="text"
-            placeholder="Title"
+            placeholder="Title (should be small)"
             required={true}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             name="title"
             className="my-3 w-full border-2 px-3 py-2 font-roboto text-xl font-semibold tracking-wide text-dark-hard outline-blue-600 transition-all ease-linear "
           />
+          <input
+            type="text"
+            placeholder="Brief summary in 1-2 sentences"
+            required={true}
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            name="caption"
+            className="my-3 w-full border-2 px-3 py-2 font-roboto text-xl font-semibold tracking-wide text-dark-hard outline-blue-600 transition-all ease-linear "
+          />
+
+          <label
+            htmlFor="category"
+            className="pl-0.5 font-semibold text-dark-soft"
+          >
+            Select Category:
+          </label>
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+            name="category"
+            id="category"
+            className="mb-2 rounded-lg border-2 border-slate-300 p-2"
+          >
+            <option value="Category">-Select Category-</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+
           <div className=" leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
             <Editor
               content={"<p>Write Here...</p>"}

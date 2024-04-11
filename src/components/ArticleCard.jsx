@@ -22,36 +22,44 @@ const ArticleCard = ({ classname = "", post }) => {
 
   return (
     <div
-      className={`rounded-xl overflow-hidden shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] h-[22rem] w-72  2xl:h-[24.5rem] 2xl:w-[21rem] transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] hover:scale-105 ${classname} `}
+      className={`h-[22rem] w-72 overflow-hidden rounded-xl shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]  transition-all ease-linear hover:scale-105 hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] 2xl:h-[24.5rem] 2xl:w-[21rem] ${classname} `}
       onClick={navigateToPost}
     >
       <img
-        src={post?.photo ? stables.UPLOAD_FOLDER_BASE_URL + post.photo : images.PostPlaceholder}
-        className="w-full object-cover object-center h-48 2xl:h-56"
+        src={
+          post?.photo
+            ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
+            : images.PostPlaceholder
+        }
+        className="h-48 w-full object-cover object-center 2xl:h-56"
         alt={post.title}
       />
       <div className="px-3 py-2 ">
-        <h2 className="text-dark-hard text-lg 2xl:text-xl font-roboto font-bold">
+        <h2 className="line-clamp-1 font-roboto text-lg font-bold  text-dark-hard 2xl:text-xl">
           {post.title}
         </h2>
-        <p className="text-dark-soft text-sm 2xl:text-base leading-5 my-2">
+        <p className="my-2 line-clamp-2 text-sm leading-5 text-dark-soft 2xl:text-base">
           {post.caption}
         </p>
-        <div className="flex justify-between items-center py-2">
+        <div className="flex items-center justify-between py-2">
           <div className="flex items-center gap-1">
             <img
-              src={post?.author?.avatar ? stables.UPLOAD_FOLDER_BASE_URL + post.author.avatar : images.User}
-              className="w-7 h-7 2xl:w-9 2xl:h-9 rounded-full "
+              src={
+                post?.author?.avatar
+                  ? stables.UPLOAD_FOLDER_BASE_URL + post.author.avatar
+                  : images.User
+              }
+              className="h-7 w-7 rounded-full 2xl:h-9 2xl:w-9 "
               alt=""
             />
             <div className="flex flex-col">
               <h3 className="font-semibold ">{post?.author.name}</h3>
-              <p className="flex gap-[2px] items-center text-xs 2xl:text-sm ">
+              <p className="flex items-center gap-[2px] text-xs 2xl:text-sm ">
                 {" "}
                 {post?.author.verified && (
                   <>
                     <VscVerified className="text-primary " />
-                    <span className="font-light text-dark-thin italic">
+                    <span className="font-light italic text-dark-thin">
                       verified writer
                     </span>
                   </>
@@ -59,7 +67,7 @@ const ArticleCard = ({ classname = "", post }) => {
               </p>
             </div>
           </div>
-          <div className="font-semibold text-sm 2xl:text-base italic mr-2">
+          <div className="mr-2 text-sm font-semibold italic 2xl:text-base">
             {formattedDate}
           </div>
         </div>

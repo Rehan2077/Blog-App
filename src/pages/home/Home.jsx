@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Hero from "../container/Hero";
-// import { images } from '../../constants'
 import Article from "../container/Article";
 import CTA from "../container/CTA";
 

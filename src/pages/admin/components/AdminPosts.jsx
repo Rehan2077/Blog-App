@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { images, stables } from "../../../constants";
 import { deletePost, getAllPosts } from "../../../services/index/posts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -17,7 +17,6 @@ const AdminPosts = () => {
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.user);
 
   const {
@@ -29,8 +28,6 @@ const AdminPosts = () => {
     queryFn: () => getAllPosts(filter, 10, currentPage),
     queryKey: ["posts"],
   });
-
-  console.log(postData);
 
   const { mutate: mutateDeletePost, isLoading: isLoadingDeletePost } =
     useMutation({
@@ -124,7 +121,9 @@ const AdminPosts = () => {
                     <th
                       scope="col"
                       className="border-b border-gray-200 bg-white py-3 text-center text-sm uppercase text-gray-800 "
-                    ></th>
+                    >
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

@@ -82,7 +82,7 @@ const Header = () => {
                 </span>
               </span>
               <ol className="text-md  absolute -bottom-[20px] left-[82px]  hidden w-28 rounded-xl  group-hover:block lg:-left-1 lg:top-5 lg:w-32 lg:pt-6 ">
-                <Link to={""}>
+                <Link to={"/about-us"}>
                   <li
                     className={`w-full rounded-t-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
                     onClick={navVisiblitiyHandler}
@@ -90,7 +90,7 @@ const Header = () => {
                     ABOUT US
                   </li>
                 </Link>
-                <Link to={""}>
+                <Link to={"/contact-us"}>
                   <li
                     className={`w-full rounded-b-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200 `}
                     onClick={navVisiblitiyHandler}
@@ -100,17 +100,33 @@ const Header = () => {
                 </Link>
               </ol>
             </li>
-            <NavLink
-              style={({ isActive }) => ({
-                color: isActive ? "#1565D8" : "#183B56",
-                fontWeight: isActive ? "700" : "600",
-              })}
-              className="transition-colors ease-linear hover:text-primary"
-              onClick={navVisiblitiyHandler}
-              to={"/faq"}
-            >
-              FAQ
-            </NavLink>
+            {userInfo && userInfo?.admin ? (
+              <NavLink
+                style={({ isActive }) => ({
+                  color: isActive ? "#1565D8" : "#183B56",
+                  fontWeight: isActive ? "700" : "600",
+                })}
+                className="transition-colors ease-linear hover:text-primary"
+                onClick={navVisiblitiyHandler}
+                to={"/admin/posts/create"}
+              >
+                <button className="w-full rounded-lg bg-blue-100 px-5 py-2.5 text-sm font-semibold uppercase text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
+                  Create Post
+                </button>
+              </NavLink>
+            ) : (
+              <NavLink
+                style={({ isActive }) => ({
+                  color: isActive ? "#1565D8" : "#183B56",
+                  fontWeight: isActive ? "700" : "600",
+                })}
+                className="transition-colors ease-linear hover:text-primary"
+                onClick={navVisiblitiyHandler}
+                to={"/faq"}
+              >
+                FAQ
+              </NavLink>
+            )}
             <li>
               {userInfo ? (
                 <ol>
