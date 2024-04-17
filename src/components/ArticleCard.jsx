@@ -1,10 +1,9 @@
 import React from "react";
 import { VscVerified } from "react-icons/vsc";
 
-import { images } from "../constants";
-import { stables } from "../constants";
-import { formatDate } from "../utils/formatDate";
 import { useNavigate } from "react-router-dom";
+import { images, stables } from "../constants";
+import { formatDate } from "../utils/formatDate";
 
 const ArticleCard = ({ classname = "", post }) => {
   const joinedDate = formatDate(post?.createdAt);

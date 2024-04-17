@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { images, stables } from "../../../constants";
-import { deletePost, getAllPosts } from "../../../services/index/posts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { formatDate } from "../../../utils/formatDate";
-import Pagination from "../../../components/Pagination";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { FiSearch } from "react-icons/fi";
 import { MdDelete, MdEdit, MdRemoveRedEye } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Pagination from "../../../components/Pagination";
+import { images, stables } from "../../../constants";
+import { deletePost, getAllPosts } from "../../../services/index/posts";
+import { formatDate } from "../../../utils/formatDate";
 
 let isFirstVisited = true;
 

@@ -1,14 +1,14 @@
 import { FaArrowRight } from "react-icons/fa";
 
-import ArticleCard from "../../components/ArticleCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../services/index/posts";
 import toast from "react-hot-toast";
-import ArticleCardSkeleton from "../../components/skeleton/ArticleCardSkeleton";
 import { Link } from "react-router-dom";
+import ArticleCard from "../../components/ArticleCard";
+import ArticleCardSkeleton from "../../components/skeleton/ArticleCardSkeleton";
+import { getAllPosts } from "../../services/index/posts";
 
 const Article = () => {
-  const { data, isLoading,  } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => getAllPosts("", 8),
     queryKey: ["posts"],
     onError: (err) => {

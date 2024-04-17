@@ -5,7 +5,6 @@ import { FiSearch } from "react-icons/fi";
 import { MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Pagination from "../../../components/Pagination";
 import { images, stables } from "../../../constants";
 import {
   deleteComment,

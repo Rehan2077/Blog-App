@@ -1,24 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ArticlePage from "./pages/articleDetails/ArticlePage";
-import Register from "./pages/register/Register";
-import { Toaster } from "react-hot-toast";
-import Login from "./pages/login/Login";
-import { useEffect } from "react";
 import axios from "axios";
+import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "./store/reducers/user";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import AboutUs from "./pages/aboutus/AboutUs";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminComments from "./pages/admin/components/AdminComments";
+import AdminDashboard from "./pages/admin/components/AdminDashboard";
+import AdminPosts from "./pages/admin/components/AdminPosts";
+import CreatePost from "./pages/admin/components/CreatePost";
+import EditPost from "./pages/admin/components/EditPost";
+import Article from "./pages/article/Article";
+import ArticlePage from "./pages/articleDetails/ArticlePage";
+import ContactUs from "./pages/contactus/ContactUs";
+import FAQ from "./pages/faq/FAQ";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import UpdateProfile from "./pages/profile/UpdateProfile";
-import Article from "./pages/article/Article";
-import AdminLayout from "./pages/admin/AdminLayout";
-import AdminDashboard from "./pages/admin/components/AdminDashboard";
-import AdminComments from "./pages/admin/components/AdminComments";
-import AdminPosts from "./pages/admin/components/AdminPosts";
-import EditPost from "./pages/admin/components/EditPost";
-import CreatePost from "./pages/admin/components/CreatePost";
+import Register from "./pages/register/Register";
+import { setUserInfo } from "./store/reducers/user";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,8 +35,8 @@ const App = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          dispatch(setUserInfo(res.data.user))
-        })
+          dispatch(setUserInfo(res.data.user));
+        });
     } catch (error) {
       console.log(error);
     }
@@ -44,8 +47,11 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route index path="/article" element={<Article />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/article" element={<Article />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

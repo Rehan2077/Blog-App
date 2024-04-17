@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
+import { Link, useParams } from "react-router-dom";
 
-import BreadCrumbs from "../../components/BreadCrumbs";
-import { images, stables } from "../../constants";
-import SuggestedPosts from "./container/SuggestedPosts";
-import CommentsContainer from "../../components/comments/CommentsContainer";
-import SocialShare from "../../components/SocialShare";
-import { getAllPosts, getSinglePost } from "../../services/index/posts";
-import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { useSelector } from "react-redux";
+import BreadCrumbs from "../../components/BreadCrumbs";
+import SocialShare from "../../components/SocialShare";
+import CommentsContainer from "../../components/comments/CommentsContainer";
 import Editor from "../../components/editor/Editor";
+import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
+import { images, stables } from "../../constants";
+import { getAllPosts, getSinglePost } from "../../services/index/posts";
 import { formatDate } from "../../utils/formatDate";
+import SuggestedPosts from "./container/SuggestedPosts";
 
 const ArticlePage = () => {
   const { slug } = useParams();
@@ -69,7 +69,7 @@ const ArticlePage = () => {
           className="mt-1 h-auto w-full rounded-lg object-cover object-center md:aspect-video lg:h-[25rem] xl:h-[26rem]"
           alt="Laptop"
         />
-        <div className="mt-3 flex gap-4 tracking-widest text-primary lg:text-xl uppercase">
+        <div className="mt-3 flex gap-4 uppercase tracking-widest text-primary lg:text-xl">
           <Link to={`/article?category=${data?.post?.categories[0]}`}>
             {data?.post?.categories[0]}
           </Link>

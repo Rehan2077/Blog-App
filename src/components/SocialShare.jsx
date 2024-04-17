@@ -14,8 +14,8 @@ import {
 
 const SocialShare = ({ url, title }) => {
   return (
-    <div className="flex mt-5 gap-2">
-      <h2 className="text-lg lg:text-xl font-bold text-dark-hard ">
+    <div className="mt-5 flex gap-2">
+      <h2 className="text-lg font-bold text-dark-hard lg:text-xl ">
         Share on:
       </h2>
       <div className=" flex gap-4 ">

@@ -1,10 +1,10 @@
 import React from "react";
-import { usePagination, DOTS } from "../hooks/usePagination";
+import { DOTS, usePagination } from "../hooks/usePagination";
 
 const Pagination = ({
   currentPage,
   siblingCount = 1,
-  totalPageCount=1,
+  totalPageCount = 1,
   onPageChange,
 }) => {
   const paginationRange = usePagination({

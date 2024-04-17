@@ -9,8 +9,6 @@ const SuggestedPosts = ({
   posts = [],
   tags = [],
 }) => {
-
-
   return (
     <section
       className={`mb-5 mt-10 h-fit rounded-lg p-4  shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] lg:w-1/3 ${classname}`}
@@ -28,27 +26,31 @@ const SuggestedPosts = ({
                 key={post?._id}
                 className="my-1 flex items-center  gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary md:w-[21rem] lg:w-full"
               >
-                <img
-                  src={
-                    post?.photo
-                      ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
-                      : images.PostPlaceholder
-                  }
-                  className="w-12 md:w-20 h-14 rounded-lg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="text-sm font-[450] text-dark-soft md:text-base lg:text-lg xl:text-xl ">
-                    <Link to={`/article/${post.slug}`}>{post.title}</Link>
-                  </h3>
-                  <span className="mt-1 text-xs font-thin text-dark-thin md:text-[0.8rem] lg:text-base">
-                    {new Date(post.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "2-digit",
-                    })}
-                  </span>
-                </div>
+                <Link to={`/article/${post.slug}`}>
+                  <img
+                    src={
+                      post?.photo
+                        ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
+                        : images.PostPlaceholder
+                    }
+                    className="h-14 w-12 rounded-lg md:w-20"
+                    alt=""
+                  />
+                </Link>
+                <Link to={`/article/${post.slug}`}>
+                  <div className="flex flex-col">
+                    <h3 className="text-sm font-[450] text-dark-soft md:text-base lg:text-lg xl:text-xl ">
+                      {post.title}
+                    </h3>
+                    <span className="mt-1 text-xs font-thin text-dark-thin md:text-[0.8rem] lg:text-base">
+                      {new Date(post.createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                </Link>
               </div>
             </>
           );

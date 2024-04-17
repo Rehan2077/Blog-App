@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { updateProfile } from "../../services/index/users";
-import UpdateProfilePicture from "../../components/UpdateProfilePicture";
-import { setUserInfo } from "../../store/reducers/user";
 import { useEffect } from "react";
+import UpdateProfilePicture from "../../components/UpdateProfilePicture";
+import { updateProfile } from "../../services/index/users";
+import { setUserInfo } from "../../store/reducers/user";
 
 const Profile = () => {
   const navigate = useNavigate();

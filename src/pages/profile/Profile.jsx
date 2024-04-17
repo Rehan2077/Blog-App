@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { VscVerified } from "react-icons/vsc";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { formatDate } from "../../utils/formatDate";
 import { useEffect } from "react";
 import ProfilePicture from "../../components/ProfilePicture";
+import { formatDate } from "../../utils/formatDate";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);

@@ -11,7 +11,7 @@ const userSlice = createSlice({
     },
     clearUserInfo: (state) => {
       state.userInfo = null;
-    }
+    },
   },
 });
 

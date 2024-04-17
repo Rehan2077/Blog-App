@@ -1,6 +1,6 @@
 import axios from "axios";
-import { clearUserInfo } from "../../store/reducers/user";
 import toast from "react-hot-toast";
+import { clearUserInfo } from "../../store/reducers/user";
 
 const url = process.env.REACT_APP_BACKEND_URL;
 

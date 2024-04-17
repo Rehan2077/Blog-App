@@ -1,11 +1,11 @@
-import ArticleCard from "../../components/ArticleCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../services/index/posts";
-import toast from "react-hot-toast";
-import ArticleCardSkeleton from "../../components/skeleton/ArticleCardSkeleton";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
+import ArticleCard from "../../components/ArticleCard";
+import ArticleCardSkeleton from "../../components/skeleton/ArticleCardSkeleton";
+import { getAllPosts } from "../../services/index/posts";
 import { PostCategories } from "../../utils/categoryTypes";
 
 const Article = () => {
@@ -30,8 +30,10 @@ const Article = () => {
 
   const [categoryPosts, setCategoryPosts] = useState([]);
 
+  console.log(category, categoryPosts);
+
   const updateCategoryPosts = (category) => {
-    if (category === "All" || undefined) {
+    if (category === "All" || false) {
       setCategoryPosts(data?.data?.posts);
     } else {
       const filteredPosts = data?.data?.posts?.filter(
@@ -40,6 +42,12 @@ const Article = () => {
       setCategoryPosts(filteredPosts);
     }
   };
+
+  useEffect(() => {
+    if (data?.data?.posts) {
+      updateCategoryPosts(category);
+    }
+  }, [data, category]);
 
   const filterPostHandler = (e) => {
     e.preventDefault();
@@ -113,16 +121,32 @@ const Article = () => {
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
+      <div className="flex min-h-[42vh] w-full flex-wrap gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
         {isLoading
           ? Array.from({ length: 4 }, (_, i) => <ArticleCardSkeleton key={i} />)
-          : categoryPosts
-              ?.filter((post) =>
-                filter
-                  ? post.title.toLowerCase().includes(filter.toLowerCase())
-                  : post,
-              )
-              .map((post) => <ArticleCard key={post._id} post={post} />)}
+          : (category === "All"
+              ? data?.data?.posts
+                  ?.filter((post) =>
+                    filter
+                      ? post.title.toLowerCase().includes(filter.toLowerCase())
+                      : post,
+                  )
+                  .map((post) => <ArticleCard key={post._id} post={post} />)
+              : categoryPosts
+                  ?.filter((post) =>
+                    filter
+                      ? post.title.toLowerCase().includes(filter.toLowerCase())
+                      : post,
+                  )
+                  .map((post) => (
+                    <ArticleCard key={post._id} post={post} />
+                  ))) || (
+              <div className="flex w-full items-center justify-center">
+                <h1 className="text-center text-2xl font-bold text-dark-soft">
+                  No Posts Found
+                </h1>
+              </div>
+            )}
       </div>
     </section>
   );

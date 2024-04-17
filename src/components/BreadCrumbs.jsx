@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BreadCrumbs = ({ data }) => {
   return (
-    <div className="flex items-center py-4 md:pt-2 lg:pb-1 overflow-x-auto whitespace-nowrap text-black opacity-50 text-sm md:font-roboto lg:text-base">
+    <div className="flex items-center overflow-x-auto whitespace-nowrap py-4 text-sm text-black opacity-50 md:pt-2 md:font-roboto lg:pb-1 lg:text-base">
       {data.map((item, index) => (
         <div key={index} className="flex">
           {index !== data.length - 1 ? (

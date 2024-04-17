@@ -2,8 +2,8 @@ import React from "react";
 import { BiConversation, BiEdit, BiTrashAlt } from "react-icons/bi";
 
 import { images, stables } from "../../constants";
-import CommentsForm from "./CommentsForm";
 import { formatDate } from "../../utils/formatDate";
+import CommentsForm from "./CommentsForm";
 
 const Comment = ({
   comment = null,

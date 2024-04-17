@@ -158,7 +158,6 @@ const EditPost = () => {
           id="category"
           className="mb-2 rounded-lg border-2 border-slate-300 p-2"
         >
-          O
           {categories.map((category) => (
             <option key={category.id} value={category.name}>
               {category.name}

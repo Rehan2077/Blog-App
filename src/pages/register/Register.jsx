@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../services/index/users";
 
 const Register = () => {

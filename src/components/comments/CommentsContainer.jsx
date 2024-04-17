@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import CommentsForm from "./CommentsForm";
-import Comment from "./Comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import {
   createComment,
   deleteComment,
   updateComment,
 } from "../../services/index/comments";
-import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import Comment from "./Comment";
+import CommentsForm from "./CommentsForm";
 
 const CommentsContainer = ({
   comments,

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Hero from "../container/Hero";
 import Article from "../container/Article";
 import CTA from "../container/CTA";
+import Hero from "../container/Hero";
 
 const Home = () => {
   const scrollToTop = () => {

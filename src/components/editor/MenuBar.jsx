@@ -23,9 +23,7 @@ const MenuBar = ({ editor }) => {
   return (
     <div className="sticky left-0 right-0 top-3 z-10 flex flex-wrap gap-0.5 rounded-lg border border-slate-300 bg-white p-5">
       <button
-        onClick={() =>
-          editor.chain().focus().toggleHeading({ level: 1 }).run()
-        }
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={`editor-btn font-black ${
           editor.isActive("heading", { level: 1 }) && "active-editor-btn"
         }`}
@@ -33,9 +31,7 @@ const MenuBar = ({ editor }) => {
         H1
       </button>
       <button
-        onClick={() =>
-          editor.chain().focus().toggleHeading({ level: 2 }).run()
-        }
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={`editor-btn font-extrabold ${
           editor.isActive("heading", { level: 2 }) && "active-editor-btn"
         }`}
@@ -43,9 +39,7 @@ const MenuBar = ({ editor }) => {
         H2
       </button>
       <button
-        onClick={() =>
-          editor.chain().focus().toggleHeading({ level: 3 }).run()
-        }
+        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={`editor-btn font-semibold ${
           editor.isActive("heading", { level: 3 }) && "active-editor-btn"
         }`}

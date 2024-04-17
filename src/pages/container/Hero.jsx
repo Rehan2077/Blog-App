@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-import { images } from "../../constants";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { images } from "../../constants";
 
 const PostCategories = [
   {

@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import { images } from "../constants";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { RiArrowDownSLine, RiCloseLine } from "react-icons/ri";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { images } from "../constants";
 import { logout } from "../services/index/users";
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
       <header className="container mx-auto flex h-16 items-center justify-between p-5 text-dark-soft">
         <div className="-ml-3 flex items-center">
           <Link to={"/"}>
-            <img className="w-20 " src={images.Logo} alt="DEVBLOG" />
+            <img className="w-20 " src={images.Logo} alt="DevBlog" />
           </Link>
           <Link to={"/"}>
             <span className="text-xl font-semibold md:text-2xl">DevBlog</span>
@@ -72,7 +72,7 @@ const Header = () => {
                 })}
                 to={"article"}
               >
-                ARTICLE
+                ARTICLES
               </NavLink>
             </li>
             <li className="group relative">
@@ -81,10 +81,18 @@ const Header = () => {
                   PAGES <RiArrowDownSLine />
                 </span>
               </span>
-              <ol className="text-md  absolute -bottom-[20px] left-[82px]  hidden w-28 rounded-xl  group-hover:block lg:-left-1 lg:top-5 lg:w-32 lg:pt-6 ">
+              <ol className="text-md  absolute -bottom-[20px] left-[82px] hidden w-28 rounded-xl  group-hover:block lg:-left-1 lg:top-5 lg:w-32 lg:pt-6 ">
+                <Link to={"/faq"}>
+                  <li
+                    className={`w-full rounded-t-xl bg-gray-900 py-2 pl-3 pr-2  text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
+                    onClick={navVisiblitiyHandler}
+                  >
+                    FAQ
+                  </li>
+                </Link>
                 <Link to={"/about-us"}>
                   <li
-                    className={`w-full rounded-t-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
+                    className={`w-full  bg-gray-900 py-2 pl-3 pr-2  text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200`}
                     onClick={navVisiblitiyHandler}
                   >
                     ABOUT US
@@ -92,7 +100,7 @@ const Header = () => {
                 </Link>
                 <Link to={"/contact-us"}>
                   <li
-                    className={`w-full rounded-b-xl bg-gray-900 py-2 pl-2 pr-2 text-center text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200 `}
+                    className={`w-full rounded-b-xl bg-gray-900 py-2 pl-3 pr-2  text-[0.9rem] hover:text-primary lg:bg-gray-100 lg:pl-3 lg:text-left lg:hover:bg-gray-200 `}
                     onClick={navVisiblitiyHandler}
                   >
                     CONTACT US
@@ -100,7 +108,7 @@ const Header = () => {
                 </Link>
               </ol>
             </li>
-            {userInfo && userInfo?.admin ? (
+            {userInfo && userInfo?.admin && (
               <NavLink
                 style={({ isActive }) => ({
                   color: isActive ? "#1565D8" : "#183B56",
@@ -113,18 +121,6 @@ const Header = () => {
                 <button className="w-full rounded-lg bg-blue-100 px-5 py-2.5 text-sm font-semibold uppercase text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
                   Create Post
                 </button>
-              </NavLink>
-            ) : (
-              <NavLink
-                style={({ isActive }) => ({
-                  color: isActive ? "#1565D8" : "#183B56",
-                  fontWeight: isActive ? "700" : "600",
-                })}
-                className="transition-colors ease-linear hover:text-primary"
-                onClick={navVisiblitiyHandler}
-                to={"/faq"}
-              >
-                FAQ
               </NavLink>
             )}
             <li>

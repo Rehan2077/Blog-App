@@ -1,11 +1,11 @@
-import { HiOutlineCamera } from "react-icons/hi";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { HiOutlineCamera } from "react-icons/hi";
 
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Editor from "../../../components/editor/Editor";
 import { createPost } from "../../../services/index/posts";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { PostCategories } from "../../../utils/categoryTypes";
 
 const CreatePost = () => {

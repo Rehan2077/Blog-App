@@ -32,13 +32,18 @@ export const createComment = async ({
   }
 };
 
-export const updateComment = async ({ desc, commentId, token, type="update" }) => {
+export const updateComment = async ({
+  desc,
+  commentId,
+  token,
+  type = "update",
+}) => {
   try {
     const { data } = await axios.put(
       `${url}/api/v1/comments/${commentId}`,
       {
         desc,
-        type
+        type,
       },
       {
         headers: {
@@ -68,10 +73,9 @@ export const deleteComment = async ({ commentId, token }) => {
     throw new Error(error.message);
   }
 };
-let i=0;
+let i = 0;
 export const getAllComments = async ({ token, searchKeyword = "" }) => {
   try {
-
     const { data } = await axios.get(
       `${url}/api/v1/comments/?searchKeyword=${searchKeyword}`,
       {

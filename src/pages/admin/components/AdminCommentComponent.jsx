@@ -1,7 +1,7 @@
 import React from "react";
-import { images, stables } from "../../../constants/";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { images, stables } from "../../../constants/";
 
 const AdminCommentComponent = ({ comment, toggleComment, classname }) => {
   return (

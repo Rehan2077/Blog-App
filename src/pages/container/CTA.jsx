@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { images } from "../../constants";
 import toast from "react-hot-toast";
+import { images } from "../../constants";
 
 const CTA = () => {
   const [email, setEmail] = useState("");
@@ -31,10 +31,10 @@ const CTA = () => {
           clipRule="evenodd"
           d="M2160 262.5H0V0C360 80 720 120 1080 120C1440 120 1800 80 2160 0V262.5Z"
           fill="#0D2436"
-          className="dark:hidden"
+          // className="dark:hidden"
         />
       </svg>
-      <section className="bg-dark-hard px-5 dark:lg:-mt-20">
+      <section className="bg-dark-hard px-5 ">
         <div className="container mx-auto flex w-full flex-col-reverse justify-between gap-x-10 text-center text-white lg:flex-row lg:items-center lg:text-left">
           <div className="mt-5 flex flex-col items-center md:-mt-10 lg:-mt-40 lg:w-1/2 lg:items-start xl:-mt-52">
             <h2 className="text-3xl font-semibold md:text-4xl lg:text-3xl xl:text-4xl">

@@ -25,7 +25,7 @@ export const getSinglePost = async (slug) => {
   }
 };
 
-export const deletePost = async ({slug, token}) => {
+export const deletePost = async ({ slug, token }) => {
   try {
     const { data } = await axios.delete(`${url}/api/v1/posts/${slug}`, {
       headers: {
@@ -59,7 +59,7 @@ export const updatePost = async (updatedData, slug, token) => {
   }
 };
 
-export const createPost = async ({postData, token}) => {
+export const createPost = async ({ postData, token }) => {
   try {
     const { data } = await axios.post(`${url}/api/v1/posts/`, postData, {
       headers: {
