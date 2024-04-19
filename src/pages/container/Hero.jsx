@@ -85,7 +85,7 @@ const Hero = () => {
           </ul>
         </div>
       </div>
-      <div className="hidden items-center justify-end lg:flex xl:w-1/2 ">
+      <div className="hidden items-center justify-end lg:flex md:w-1/3 xl:w-1/2 my-14 bg-white rounded-3xl">
         <img src={images.BlogImage} alt="Live chat" />
       </div>
     </section>

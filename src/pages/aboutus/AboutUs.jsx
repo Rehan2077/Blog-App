@@ -61,7 +61,7 @@ const AboutUs = () => {
           </p>
         </div>
       </div>
-      <div>
+      {/* <div>
         <h3 className="mb-2 text-xl font-bold text-dark-soft">Meet Our Team</h3>
         <ul className="flex list-disc flex-col px-5 py-2  text-[1.1rem] text-dark-thin">
           <li>
@@ -104,7 +104,7 @@ const AboutUs = () => {
             </p>
           </li>
         </ul>
-      </div>
+      </div> */}
       <div>
         <h3 className="text-xl font-bold text-dark-soft">Join Us</h3>
         <p className=" text-lg text-dark-thin">

@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@tiptap/extension-code-block-lowlight": "^2.1.16",
     "@tiptap/extension-color": "^2.1.16",
+    "@tiptap/extension-dropcursor": "^2.3.0",
+    "@tiptap/extension-image": "^2.3.0",
     "@tiptap/extension-text-style": "^2.1.16",
     "@tiptap/html": "^2.1.13",
     "@tiptap/pm": "^2.1.13",

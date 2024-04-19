@@ -73,7 +73,7 @@ const Footer = () => {
             </span>
           </div>
           <p className="text-center text-sm text-dark-thin md:text-start lg:text-lg">
-            Elevate your coding journey with DevBlog -{" "}
+            Elevate your knowledge with DevBlog -{" "}
             <br className="hidden lg:block" /> Where Passion Meets Innovation.
           </p>
           <ul className="mt-10 flex items-center justify-center gap-x-3 space-x-4 text-gray-300 md:justify-start md:text-lg">
