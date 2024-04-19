@@ -34,7 +34,11 @@ const extensions = [
   CodeBlockLowlight.configure({
     lowlight,
   }),
-  Image,
+  Image.configure({
+    HTMLAttributes: {
+      class: 'tiptap-image',
+    },
+  }),
   Dropcursor,
 ];
 

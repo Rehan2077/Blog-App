@@ -81,7 +81,7 @@ const Article = () => {
 
   return (
     <section className="container mx-auto flex flex-col flex-wrap p-5 md:gap-5">
-      <div className="flex items-center justify-between px-1">
+      <div className="flex flex-col items-center justify-between gap-3 px-1 md:flex-row">
         {/* <form onSubmit={filterPostHandler} className="flex"> */}
         <div className="relative my-5 lg:my-0">
           <FiSearch className=" absolute left-2 top-[10px] h-5 w-5 text-[#959EAD] md:top-[12px]" />
@@ -121,7 +121,7 @@ const Article = () => {
           </select>
         </div>
       </div>
-      <div className="flex min-h-[42vh] w-full flex-wrap gap-x-7 gap-y-10 md:gap-x-10 xl:gap-x-7 2xl:justify-normal 2xl:gap-x-11">
+      <div className="flex min-h-[42vh] w-full flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 lg:justify-normal xl:gap-x-7 2xl:gap-x-11">
         {isLoading
           ? Array.from({ length: 4 }, (_, i) => <ArticleCardSkeleton key={i} />)
           : (category === "All"

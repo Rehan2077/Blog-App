@@ -16,7 +16,7 @@ const SuggestedPosts = ({
       <h2 className="font-roboto text-lg font-[450] text-dark-hard lg:text-xl">
         {header}
       </h2>
-      <div className="mt-5 flex flex-col md:flex-row md:flex-wrap md:justify-between md:gap-5 lg:flex-col lg:flex-nowrap">
+      <div className="mt-5 flex flex-col md:flex-row md:flex-wrap md:justify-between md:gap-3 lg:flex-col lg:flex-nowrap">
         {posts?.map((post) => {
           if (currentPostId === post?._id)
             return <div key={post?._id} className="hidden"></div>;
@@ -24,25 +24,25 @@ const SuggestedPosts = ({
             <>
               <div
                 key={post?._id}
-                className="my-1 flex items-center  gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary md:w-[21rem] lg:w-full"
+                className="flex flex-1 items-center gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary md:w-[21rem] lg:w-full lg:gap-3"
               >
-                <Link to={`/article/${post.slug}`}>
+                <Link to={`/article/${post.slug}`} className="lg:w-36">
                   <img
                     src={
                       post?.photo
                         ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
                         : images.PostPlaceholder
                     }
-                    className="h-14 w-12 rounded-lg md:w-20"
+                    className="h-14 w-20 rounded-lg object-fill object-center lg:w-full "
                     alt=""
                   />
                 </Link>
                 <Link to={`/article/${post.slug}`}>
                   <div className="flex flex-col">
-                    <h3 className="text-sm font-[450] text-dark-soft md:text-base lg:text-lg xl:text-xl ">
+                    <h3 className="text-sm font-[450] text-dark-soft md:text-base lg:text-lg  ">
                       {post.title}
                     </h3>
-                    <span className="mt-1 text-xs font-thin text-dark-thin md:text-[0.8rem] lg:text-base">
+                    <span className="mt-1 text-xs font-thin text-dark-thin md:text-[0.8rem] lg:text-[0.9rem]">
                       {new Date(post.createdAt).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "short",

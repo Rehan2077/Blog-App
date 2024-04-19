@@ -30,17 +30,17 @@ const ArticleCard = ({ classname = "", post }) => {
             ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
             : images.PostPlaceholder
         }
-        className="h-48 w-full object-cover object-center 2xl:h-56"
+        className="h-48 w-full object-fill object-center 2xl:h-56"
         alt={post.title}
       />
-      <div className="px-3 py-2 ">
-        <h2 className="line-clamp-1 font-roboto text-lg font-bold  text-dark-hard 2xl:text-xl">
+      <div className="px-3 py-1 ">
+        <h2 className="line-clamp-2 font-roboto text-lg font-bold  text-dark-hard 2xl:text-xl">
           {post.title}
         </h2>
-        <p className="my-2 line-clamp-2 text-sm leading-5 text-dark-soft 2xl:text-base">
+        <p className="my-1 line-clamp-2 text-sm leading-5 text-dark-soft 2xl:text-base">
           {post.caption}
         </p>
-        <div className="flex items-center justify-between py-2">
+        <div className="flex items-center justify-between py-1">
           <div className="flex items-center gap-1">
             <img
               src={
