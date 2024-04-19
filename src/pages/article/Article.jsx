@@ -121,7 +121,7 @@ const Article = () => {
           </select>
         </div>
       </div>
-      <div className="flex min-h-[42vh] w-full flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 lg:justify-normal xl:gap-x-7 2xl:gap-x-11">
+      <div className="flex min-h-[42vh] mt-3 lg:mt-0 w-full flex-wrap justify-center gap-x-7 gap-y-10 md:gap-x-10 lg:justify-normal xl:gap-x-7 2xl:gap-x-11">
         {isLoading
           ? Array.from({ length: 4 }, (_, i) => <ArticleCardSkeleton key={i} />)
           : (category === "All"

@@ -21,7 +21,7 @@ const ArticleCard = ({ classname = "", post }) => {
 
   return (
     <div
-      className={`h-[22rem] w-72 overflow-hidden rounded-xl shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]  transition-all ease-linear hover:scale-105 hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] 2xl:h-[24.5rem] 2xl:w-[21rem] ${classname} `}
+      className={`h-[22rem] w-72 overflow-hidden rounded-xl bg-white shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]  transition-all ease-linear hover:scale-105 hover:shadow-[rgba(13,_38,_200,_0.3)_0px_9px_20px] 2xl:h-[24.5rem] 2xl:w-[21rem] ${classname} `}
       onClick={navigateToPost}
     >
       <img
