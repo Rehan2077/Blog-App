@@ -28,9 +28,9 @@ const CommentsForm = ({
       onSubmit={submitHandler}
       className={`${formCancelHandler && "mt-4  lg:text-lg"} `}
     >
-      <div className="-mt-2 mb-2 flex flex-col items-end justify-center rounded-lg border border-primary  bg-gray-100 font-opensans text-dark-soft transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_5px_20px] ">
+      <div className="-mt-2 mb-2 flex flex-col items-end justify-center rounded-lg border border-primary  bg-white font-opensans text-dark-soft transition-all ease-linear hover:shadow-[rgba(13,_38,_200,_0.3)_0px_5px_20px] ">
         <textarea
-          className="p-y-2 my-2 w-full bg-gray-100 px-3 text-[0.95rem] outline-none md:text-base "
+          className="p-y-2 my-2 w-full bg-white px-3 text-[0.95rem] outline-none md:text-base "
           name="comment"
           id="comment"
           rows={`${formCancelHandler} ? "3" : "4"}`}

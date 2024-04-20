@@ -37,7 +37,7 @@ const Comment = ({
   const replyOnUserId = comment.author._id;
 
   return (
-    <div className={`flex  flex-col rounded-lg bg-[#F2F4F5]  `}>
+    <div className={`flex  flex-col rounded-lg bg-white  `}>
       <div
         className={`flex flex-1 flex-nowrap items-start gap-3 p-3 ${classname}`}
       >
@@ -144,7 +144,7 @@ const Comment = ({
               replyComment.parent === comment._id && (
                 <Comment
                   key={replyComment._id}
-                  classname="pl-7 "
+                  classname="pl-7"
                   comment={replyComment}
                   loggedInUser={loggedInUser}
                   affectedComment={affectedComment}
