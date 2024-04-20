@@ -21,13 +21,13 @@ const Header = () => {
   return (
     <section className="sticky top-0 z-50 bg-white shadow-md">
       <header className="container mx-auto flex h-16 items-center justify-between p-5 text-dark-soft">
-        <div className="-ml-3 flex items-center">
+        <div className=" flex items-center">
           <Link to={"/"}>
-            <img className="w-20 " src={images.Logo} alt="DevBlog" />
+            <img className="w-32" src={images.Nexus} alt="NEXUS" />
           </Link>
-          <Link to={"/"}>
-            <span className="text-xl font-semibold md:text-2xl">DevBlog</span>
-          </Link>
+          {/* <Link to={"/"}>
+            <span className="text-xl font-semibold md:text-2xl">NEXUS</span>
+          </Link> */}
         </div>
         <div
           className={`z-50 rounded-xl border border-gray-600 px-2 py-1 active:border-gray-400 lg:hidden`}

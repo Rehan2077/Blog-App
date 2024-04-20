@@ -10,7 +10,7 @@ const CTA = () => {
       email.indexOf("@") !== -1 &&
       email.indexOf(".") !== -1
     ) {
-      toast.success("Thank you for joining the DevBlog newsletter!");
+      toast.success("Thank you for joining the NEXUS newsletter!");
       setEmail("");
     } else {
       toast.error("Please enter a valid email address.");
@@ -56,7 +56,7 @@ const CTA = () => {
               </button>
             </div>
             <p className="mb-10 mt-3 text-dark-thin md:mb-0">
-              Enter your email above to join the DevBlog newsletter!
+              Enter your email above to join the NEXUS newsletter!
             </p>
           </div>
           <div className="hidden md:mt-10 md:block lg:-mb-10 lg:-ml-0 lg:mt-10 lg:w-1/2 ">

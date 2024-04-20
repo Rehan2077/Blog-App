@@ -64,16 +64,16 @@ const Footer = () => {
             className="flex items-center justify-center md:justify-start "
           >
             <img
-              src={images.Logo}
-              className="-ml-5 h-auto w-[70px] cursor-pointer md:-ml-3"
-              alt="DevBlog"
+              src={images.Nexus}
+              className=" h-auto w-32 cursor-pointer -ml-1"
+              alt="NEXUS"
             />
-            <span className="cursor-pointer text-lg font-bold text-gray-100 md:text-xl">
-              DevBlog
-            </span>
+            {/* <span className="cursor-pointer text-lg font-bold text-gray-100 md:text-xl">
+              NEXUS
+            </span> */}
           </div>
           <p className="text-center text-sm text-dark-thin md:text-start lg:text-lg">
-            Elevate your knowledge with DevBlog -{" "}
+            Elevate your knowledge with NEXUS -{" "}
             <br className="hidden lg:block" /> Where Passion Meets Innovation.
           </p>
           <ul className="mt-10 flex items-center justify-center gap-x-3 space-x-4 text-gray-300 md:justify-start md:text-lg">
@@ -95,7 +95,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className=" col-span-10 hidden text-center italic tracking-wide text-[#7d8b97] md:block lg:col-span-12 lg:-mb-5 lg:mt-5">
-          <h2>All rights reserved © 2023 DevBlog - rehan2077</h2>
+          <h2>All rights reserved © 2023 NEXUS - rehan2077</h2>
         </div>
       </footer>
     </section>

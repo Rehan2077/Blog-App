@@ -12,17 +12,17 @@ const ContactUs = () => {
       <div>
         <h2 className="text-2xl font-bold text-dark-hard">General Inquiries</h2>
         <p className="text-lg text-dark-soft">
-          For general inquiries or feedback about DevBlog, please reach out to
+          For general inquiries or feedback about NEXUS, please reach out to
           us at:
         </p>
         <ul className="my-1 list-disc pl-5 text-[1.07rem] text-dark-soft">
           <li>
             Email:{" "}
             <a
-              href="mailto:contact@devblog.com"
+              href="mailto:contact@nexusblog.com"
               className="text-base text-blue-400 hover:text-primary"
             >
-              contact@devblog.com
+              contact@nexusblog.com
             </a>{" "}
           </li>
           <li>
@@ -46,10 +46,10 @@ const ContactUs = () => {
           <li>
             Email:{" "}
             <a
-              href="mailto:support@devblog.com"
+              href="mailto:support@nexusblog.com"
               className="text-base text-blue-400 hover:text-primary"
             >
-              support@devblog.com
+              support@nexusblog.com
             </a>{" "}
           </li>
         </ul>
@@ -66,10 +66,10 @@ const ContactUs = () => {
           <li>
             Email:{" "}
             <a
-              href="mailto:joinus@devblog.com"
+              href="mailto:joinus@nexusblog.com"
               className="text-base text-blue-400 hover:text-primary"
             >
-              joinus@devblog.com
+              joinus@nexusblog.com
             </a>{" "}
           </li>
         </ul>

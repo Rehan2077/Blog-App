@@ -8,7 +8,7 @@ const FAQ = () => {
           Frequently Asked Questions (FAQ)
         </h2>
         <p className="text-lg text-dark-soft">
-          Find answers to commonly asked questions about Devblog. If you can't
+          Find answers to commonly asked questions about NEXUS. If you can't
           find the information you're looking for, please{" "}
           <Link to="/contact-us" className="text-blue-400 hover:text-primary">
             contact us
@@ -23,22 +23,22 @@ const FAQ = () => {
         </h3>
         <ul className="my-1 list-disc pl-5 text-[1.07rem] text-dark-soft">
           <li>
-            <strong>What is Devblog?</strong>
+            <strong>What is NEXUS?</strong>
             <br />
-            Devblog is your go-to platform for everything related to web
+            NEXUS is your go-to platform for everything related to web
             development, software engineering, and technology trends. We provide
             high-quality, insightful, and practical content to help developers
             at all levels grow and succeed.
           </li>
           <li>
-            <strong>When was Devblog founded?</strong>
+            <strong>When was NEXUS founded?</strong>
             <br />
-            Devblog was founded in 2024.
+            NEXUS was founded in 2024.
           </li>
           <li>
-            <strong>Is Devblog open source?</strong>
+            <strong>Is NEXUS open source?</strong>
             <br />
-            Yes, Devblog is an open-source platform. We welcome contributions
+            Yes, NEXUS is an open-source platform. We welcome contributions
             from the community to help improve and expand our content.
           </li>
         </ul>
@@ -50,15 +50,15 @@ const FAQ = () => {
         </h3>
         <ul className="my-1 list-disc pl-5 text-[1.07rem] text-dark-soft">
           <li>
-            <strong>Can I contribute articles to Devblog?</strong>
+            <strong>Can I contribute articles to NEXUS?</strong>
             <br />
             Absolutely! We encourage developers, writers, designers, and
             enthusiasts to contribute articles. Please reach out to our team at{" "}
             <a
-              href="mailto:joinus@devblog.com"
+              href="mailto:joinus@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              joinus@devblog.com
+              joinus@nexusblog.com
             </a>{" "}
             for more information.
           </li>
@@ -67,10 +67,10 @@ const FAQ = () => {
             <br />
             You can submit your article by sending it to{" "}
             <a
-              href="mailto:submit@devblog.com"
+              href="mailto:submit@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              submit@devblog.com
+              submit@nexusblog.com
             </a>
             . Please make sure to follow our{" "}
             <span className="text-blue-400 hover:text-primary">
@@ -89,7 +89,7 @@ const FAQ = () => {
           <li>
             <strong>Do I need to create an account to read articles?</strong>
             <br />
-            No, you can freely browse and read articles on Devblog without
+            No, you can freely browse and read articles on NEXUS without
             creating an account. However, creating an account allows you to
             comment, bookmark articles, and receive updates.
           </li>
@@ -98,10 +98,10 @@ const FAQ = () => {
             <br />
             To delete your account, please contact our support team at{" "}
             <a
-              href="mailto:support@devblog.com"
+              href="mailto:support@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              support@devblog.com
+              support@nexusblog.com
             </a>
             .
           </li>
@@ -121,10 +121,10 @@ const FAQ = () => {
             If you encounter any technical issues or have questions about our
             platform, please reach out to our support team at{" "}
             <a
-              href="mailto:support@devblog.com"
+              href="mailto:support@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              support@devblog.com
+              support@nexusblog.com
             </a>
             .
           </li>
@@ -133,10 +133,10 @@ const FAQ = () => {
             <br />
             You can report bugs or suggest new features by emailing us at{" "}
             <a
-              href="mailto:feedback@devblog.com"
+              href="mailto:feedback@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              feedback@devblog.com
+              feedback@nexusblog.com
             </a>
             . We appreciate your input and strive to improve our platform based
             on user feedback.
@@ -150,14 +150,14 @@ const FAQ = () => {
         </h3>
         <ul className="my-1 list-disc pl-5 text-[1.07rem] text-dark-soft">
           <li>
-            <strong>How can I contact Devblog for further assistance?</strong>
+            <strong>How can I contact NEXUS for further assistance?</strong>
             <br />
             For any additional questions or concerns, feel free to contact us at{" "}
             <a
-              href="mailto:contact@devblog.com"
+              href="mailto:contact@nexusblog.com"
               className="text-blue-400 hover:text-primary"
             >
-              contact@devblog.com
+              contact@nexusblog.com
             </a>{" "}
             or call us at{" "}
             <a

@@ -7,7 +7,7 @@ const AboutUs = () => {
       <div>
         <h3 className="text-xl font-bold text-dark-soft">Who We Are</h3>
         <p className=" text-lg text-dark-thin">
-          Welcome to DevBlog, your go-to platform for everything related to
+          Welcome to NEXUS, your go-to platform for everything related to
           software engineering, development, science, medical advancements,
           arts, and more. Founded in 2024, we are passionate about exploring the
           ever-evolving world of technology and its intersection with various
@@ -21,7 +21,7 @@ const AboutUs = () => {
           Open Source Community
         </h3>
         <p className=" text-lg text-dark-thin">
-          At DevBlog, we believe in the power of community and collaboration. We
+          At NEXUS, we believe in the power of community and collaboration. We
           are proud to be an open-source platform, inviting users from around
           the world to join our team and contribute to our growing repository of
           knowledge. Whether you're a developer, a researcher, an artist, or
@@ -69,9 +69,9 @@ const AboutUs = () => {
               Rehan Fazal - Founder, Developer & Maintenance Engineer
             </h4>
             <p className="text-lg text-dark-thin">
-              Rehan Fazal is the visionary behind DevBlog, bringing both ideas
+              Rehan Fazal is the visionary behind NEXUS, bringing both ideas
               and coding expertise to the platform. With a keen eye for detail
-              and a passion for technology, Rehan ensures that DevBlog remains
+              and a passion for technology, Rehan ensures that NEXUS remains
               at the forefront of diverse topics, from web development to
               medical innovations. From ideation to maintenance, Rehan's
               dedication drives the platform's growth and success.
@@ -82,12 +82,12 @@ const AboutUs = () => {
               Aditi Singh - UI Designer & Content Writer
             </h4>
             <p className="text-lg text-dark-thin">
-              Aditi Singh is the creative force behind DevBlog's captivating
+              Aditi Singh is the creative force behind NEXUS's captivating
               user interface and engaging content. With a background in design
               and a flair for writing, Aditi crafts visually appealing and
               informative content that resonates with our audience across
               various domains. Her innovative designs and compelling narratives
-              enhance the user experience and bring DevBlog's content to life.
+              enhance the user experience and bring NEXUS's content to life.
             </p>
           </li>
           <li>
@@ -95,7 +95,7 @@ const AboutUs = () => {
               Rahul Kr Yadav - Researcher & Community Assistant
             </h4>
             <p className="text-lg text-dark-thin">
-              Rahul Kr Yadav plays a crucial role in DevBlog's content strategy,
+              Rahul Kr Yadav plays a crucial role in NEXUS's content strategy,
               conducting in-depth research to ensure the accuracy and relevance
               of our articles and tutorials across diverse topics. As a
               dedicated helper, Rahul assists in various aspects of the
@@ -117,7 +117,7 @@ const AboutUs = () => {
           >
             Contact Us
           </Link>{" "}
-          to learn more about contributing to DevBlog.
+          to learn more about contributing to NEXUS.
         </p>
       </div>
     </section>

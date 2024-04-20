@@ -50,7 +50,7 @@ const ArticlePage = () => {
   ];
 
   const pageUrl = encodeURI(
-    `https://dev-blog-y0lw.onrender.com/article/${slug}`,
+    `${process.env.REACT_APP_FRONTEND_URL}/article/${slug}`,
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
 

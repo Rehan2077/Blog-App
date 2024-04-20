@@ -34,16 +34,16 @@ const Hero = () => {
 
   return (
     <section className="container mx-auto flex flex-col justify-between px-5 pb-5 lg:flex-row  ">
-      <div className="lg:mt-15 md:mt-12 lg:w-2/5">
+      <div className="lg:mt-15 mt-8 lg:w-2/5">
         <h1 className="text-center font-roboto text-3xl font-semibold text-dark-soft md:text-4xl lg:text-left lg:text-3xl xl:text-5xl">
           Expand your knowledge with insightful articles{" "}
           {userInfo && userInfo.name.split(" ")[0]}
         </h1>
         <p className="mt-4 text-center text-dark-thin md:text-xl lg:mt-2 lg:text-left lg:text-lg xl:text-xl ">
-          Welcome to DevBlog, where knowledge meets community. Dive into a
-          vibrant ecosystem of shared insights, where every perspective is
-          valued. Let's come together and carve the path for the future of
-          technology!
+          Welcome to <span className="font-semibold"> NEXUS</span>, where
+          knowledge meets community. Dive into a vibrant ecosystem of shared
+          insights, where every perspective is valued. Let's come together and
+          carve the path for the future of technology!
         </p>
         <div className="relative mt-7 flex flex-col lg:mt-3 lg:flex-row xl:mt-3 2xl:mt-10">
           <div className="relative md:w-full">
@@ -85,7 +85,7 @@ const Hero = () => {
           </ul>
         </div>
       </div>
-      <div className="hidden items-center justify-end lg:flex md:w-1/3 xl:w-1/2 my-14 bg-white rounded-3xl">
+      <div className="my-14 hidden items-center justify-end rounded-3xl bg-white md:w-1/3 lg:flex xl:w-1/2">
         <img src={images.BlogImage} alt="Live chat" />
       </div>
     </section>
