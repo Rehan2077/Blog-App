@@ -50,7 +50,7 @@ const ArticlePage = () => {
   ];
 
   const pageUrl = encodeURI(
-    `${process.env.REACT_APP_FRONTEND_URL}/article/${slug}`,
+    `https://nexus-kappa-two.vercel.app/article/${slug}`,
   );
   const title = encodeURIComponent(`${data?.post?.title}`);
 

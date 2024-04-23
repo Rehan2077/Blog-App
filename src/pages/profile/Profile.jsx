@@ -60,8 +60,8 @@ const Profile = () => {
                 </div>
               </div>
               <div>
-                <div>Posts: {userInfo?.totalPosts || "null"}</div>
-                <div>Comments: {userInfo?.totalComments || "null"}</div>
+                <div>Posts: {userInfo?.totalPosts || "0"}</div>
+                <div>Comments: {userInfo?.totalComments || "0"}</div>
               </div>
             </div>
             <button
