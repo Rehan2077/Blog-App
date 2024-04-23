@@ -41,7 +41,7 @@ const ArticlePage = () => {
 
   useEffect(() => {
     scrollToTop();
-  });
+  }, [slug]);
 
   const breadCrumbsData = [
     { name: "Home", link: "/" },
