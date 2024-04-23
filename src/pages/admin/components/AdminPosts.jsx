@@ -25,7 +25,7 @@ const AdminPosts = () => {
     isFetching,
     refetch,
   } = useQuery({
-    queryFn: () => getAllPosts(filter, 10, currentPage),
+    queryFn: () => getAllPosts(filter, 100, currentPage),
     queryKey: ["posts"],
   });
 
