@@ -16,7 +16,7 @@ const SuggestedPosts = ({
       <h2 className="font-roboto text-lg font-[450] text-dark-hard lg:text-xl">
         {header}
       </h2>
-      <div className="mt-5 flex flex-col md:flex-row md:flex-wrap md:justify-between md:gap-3 lg:flex-col lg:flex-nowrap">
+      <div className="mt-5 flex flex-col md:flex-wrap md:justify-between md:gap-3 lg:flex-nowrap">
         {posts?.map((post) => {
           if (currentPostId === post?._id)
             return <div key={post?._id} className="hidden"></div>;
@@ -24,7 +24,7 @@ const SuggestedPosts = ({
             <>
               <div
                 key={post?._id}
-                className="flex flex-1 items-center gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary md:w-[21rem] lg:w-full lg:gap-3"
+                className="flex flex-1 items-center gap-3 rounded-lg border p-2 transition-all ease-linear hover:border-primary lg:w-full lg:gap-3"
               >
                 <Link to={`/article/${post.slug}`} className="lg:w-36">
                   <img
