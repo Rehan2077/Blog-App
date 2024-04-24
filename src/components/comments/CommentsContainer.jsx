@@ -36,7 +36,8 @@ const CommentsContainer = ({
       },
       mutationKey: ["posts"],
       onSuccess: (data) => {
-        toast.success("Comment will appear after verification");
+        toast.success(data?.message);
+        queryClient.invalidateQueries({ queryKey: ["post", postSlug] });
       },
       onError: (error) => toast.error(error.message),
     });
