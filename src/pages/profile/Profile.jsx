@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ProfilePicture from "../../components/ProfilePicture";
 import { formatDate } from "../../utils/formatDate";
+import Verify from "./Verify";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -64,6 +65,9 @@ const Profile = () => {
                 <div>Comments: {userInfo?.totalComments || "0"}</div>
               </div>
             </div>
+            {!userInfo?.verified && (
+              <Verify token={userInfo?.token} />
+            )}
             <button
               className="mx-auto my-5 w-full rounded-lg bg-primary py-3 text-white transition-all ease-linear hover:bg-blue-700 lg:w-72"
               onClick={() => navigate("/updateprofile")}

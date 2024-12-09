@@ -95,3 +95,43 @@ export const updatePhoto = async (formdata, token) => {
     throw new Error(error.message);
   }
 };
+
+export const sendOtp = async (token) => {
+  try {
+    const { data } = await axios.post(
+      `${url}/api/v1/users/sendOtp`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const verifyOtp = async (otp, token) => {
+  try {
+    const { data } = await axios.post(
+      `${url}/api/v1/users/verifyOtp`,
+      {
+        otp,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};

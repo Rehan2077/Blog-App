@@ -12,6 +12,9 @@ const userSlice = createSlice({
     clearUserInfo: (state) => {
       state.userInfo = null;
     },
+    updateUserInfo: (state, action) => {
+      state.userInfo = { ...state.userInfo, ...action.payload };
+    },
   },
 });
 
