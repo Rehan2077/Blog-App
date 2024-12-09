@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import "highlight.js/styles/atom-one-dark.css";
-import React from "react";
 import { tiptapExtensions as extensions } from "../../constants";
 import MenuBar from "./MenuBar";
 
@@ -21,12 +21,18 @@ const Editor = ({ onDataChange, content, editable }) => {
     content: content,
   });
 
+  useEffect(() => {
+    if (editor && content) {
+      editor.commands.setContent(content);
+    }
+  }, [editor, content]);
+
   return (
     <div
       className={`relative w-full ${editable && "min-h-[300px] border-2 p-1"}`}
     >
       {editable && <MenuBar editor={editor} />}
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} className="p-3" />
     </div>
   );
 };

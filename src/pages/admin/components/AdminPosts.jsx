@@ -69,11 +69,11 @@ const AdminPosts = () => {
             <h2 className="mb-3 text-2xl font-bold leading-tight text-dark-soft lg:mb-0">
               Manage Posts
             </h2>
-            <Link to={"/admin/posts/create"}>
+            {/* <Link to={"/admin/posts/create"}>
               <button className="w-full rounded-lg bg-blue-100 px-5 py-2.5 text-sm font-semibold uppercase text-primary transition-all ease-linear hover:bg-blue-600 hover:text-white">
                 Create Post
               </button>
-            </Link>
+            </Link> */}
             <div className="text-end">
               <form onSubmit={filterPostHandler}>
                 <div className="relative my-5 lg:my-0">
@@ -174,8 +174,8 @@ const AdminPosts = () => {
                         </td>
                         <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-[0.85rem] lg:text-sm">
                           <p className="whitespace-no-wrap text-gray-900">
-                            {post?.category && post?.category?.length > 0
-                              ? post?.category
+                            {post?.categories && post?.categories?.length > 0
+                              ? post?.categories[0]
                               : "Uncategorized"}
                           </p>
                         </td>

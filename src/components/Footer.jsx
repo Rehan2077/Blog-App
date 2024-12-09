@@ -95,7 +95,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className=" col-span-10 hidden text-center italic tracking-wide text-[#7d8b97] md:block lg:col-span-12 lg:-mb-5 lg:mt-5">
-          <h2>All rights reserved © 2023 NEXUS - rehan2077</h2>
+          <h2>All rights reserved © 2024 NEXUS - rehan2077</h2>
         </div>
       </footer>
     </section>

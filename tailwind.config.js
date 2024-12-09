@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import typography from '@tailwindcss/typography'
+
 export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
 export const theme = {
   extend: {
@@ -18,5 +21,5 @@ export const theme = {
 };
 export const plugins = [
   { "tailwindcss/nesting": "postcss-nesting" },
-  require("@tailwindcss/typography"),
+  typography
 ];

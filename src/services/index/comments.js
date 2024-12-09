@@ -73,7 +73,7 @@ export const deleteComment = async ({ commentId, token }) => {
     throw new Error(error.message);
   }
 };
-let i = 0;
+
 export const getAllComments = async ({ token, searchKeyword = "" }) => {
   try {
     const { data } = await axios.get(

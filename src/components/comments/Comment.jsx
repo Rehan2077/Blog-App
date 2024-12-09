@@ -4,6 +4,7 @@ import { BiConversation, BiEdit, BiTrashAlt } from "react-icons/bi";
 import { images, stables } from "../../constants";
 import { formatDate } from "../../utils/formatDate";
 import CommentsForm from "./CommentsForm";
+import { VscVerified } from "react-icons/vsc";
 
 const Comment = ({
   comment = null,
@@ -51,8 +52,11 @@ const Comment = ({
           alt=""
         />
         <div className="flex flex-1  flex-col">
-          <h3 className="text-base font-semibold text-dark-hard md:text-lg">
+          <h3 className="flex items-center gap-1 text-base font-semibold text-dark-hard md:text-lg">
             {comment?.author?.name}
+            {comment?.author?.verified && (
+              <VscVerified className="text-lg text-primary" />
+            )}
           </h3>
           <p className="text-sm text-dark-thin">
             {formatDate(comment?.createdAt)}

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
@@ -10,13 +10,20 @@ import CommentsContainer from "../../components/comments/CommentsContainer";
 import Editor from "../../components/editor/Editor";
 import ArticleDetailsSkeleton from "../../components/skeleton/ArticleDetailsSkeleton";
 import { images, stables } from "../../constants";
-import { getAllPosts, getSinglePost } from "../../services/index/posts";
+import {
+  getAllPosts,
+  getSinglePost,
+  likePost,
+} from "../../services/index/posts";
 import { formatDate } from "../../utils/formatDate";
 import SuggestedPosts from "./container/SuggestedPosts";
+import { AiFillLike, AiOutlineComment, AiOutlineLike } from "react-icons/ai";
 
 const ArticlePage = () => {
   const { slug } = useParams();
   const { userInfo } = useSelector((state) => state.user);
+
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost(slug),
@@ -32,11 +39,30 @@ const ArticlePage = () => {
     queryKey: ["posts"],
   });
 
+  const { mutate: likePostMutation } = useMutation({
+    mutationFn: () => likePost(slug, userInfo?.token ? userInfo.token : null),
+    mutationKey: ["post", slug],
+    onSuccess: (data) => {
+      data.message && toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["post", slug] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+  };
+
+  const scrollToCommentsSection = () => {
+    const commentsSection = document.getElementById("post-comments-section");
+    if (commentsSection) {
+      commentsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   useEffect(() => {
@@ -69,8 +95,11 @@ const ArticlePage = () => {
           className="mt-1 h-auto w-full rounded-lg object-cover object-center md:aspect-video lg:h-[25rem] xl:h-[26rem]"
           alt="Laptop"
         />
-        <div className="mt-3 flex gap-4 uppercase tracking-widest text-primary lg:text-xl">
-          <Link to={`/article?category=${data?.post?.categories[0]}`}>
+        <div className="mt-3 flex justify-between gap-16 text-primary lg:text-xl">
+          <Link
+            className="uppercase tracking-widest"
+            to={`/article?category=${data?.post?.categories[0]}`}
+          >
             {data?.post?.categories[0]}
           </Link>
           {/* {data?.post?.categories?.map((category) => (
@@ -78,6 +107,31 @@ const ArticlePage = () => {
               {category.name}
             </Link>
           ))} */}
+          <div className="mr-5 flex items-center gap-10">
+            <span className="flex items-center gap-2 text-[#878787]">
+              {data?.post?.likes?.includes(userInfo?._id) ? (
+                <AiFillLike
+                  className="cursor-pointer text-2xl text-primary"
+                  onClick={likePostMutation}
+                />
+              ) : (
+                <AiOutlineLike
+                  color="#878787"
+                  className="cursor-pointer text-2xl"
+                  onClick={likePostMutation}
+                />
+              )}
+              {data?.post?.likes?.length}
+            </span>
+
+            <span
+              className="flex items-center gap-2 text-[#878787] hover:cursor-pointer"
+              onClick={scrollToCommentsSection}
+            >
+              <AiOutlineComment className="text-2xl" />
+              {data?.totalComments}
+            </span>
+          </div>
         </div>
 
         <h2 className="my-2 font-roboto text-2xl font-semibold tracking-wide text-dark-hard lg:text-3xl xl:text-4xl">
@@ -120,7 +174,7 @@ const ArticlePage = () => {
         header={"Latest Articles"}
         currentPostId={data?.post?._id}
         posts={suggestedPostsData?.data?.posts}
-        tags={data?.post?.tags}
+        tags={data?.post?.categories}
       />
     </section>
   );

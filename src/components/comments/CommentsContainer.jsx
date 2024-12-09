@@ -80,7 +80,7 @@ const CommentsContainer = ({
   };
 
   return (
-    <div className={`mt-10 lg:mb-10`}>
+    <div className={`mt-10 lg:mb-10`} id="post-comments-section">
       <CommentsForm
         btnLabel={"Submit"}
         loggedInUser={loggedInUser}

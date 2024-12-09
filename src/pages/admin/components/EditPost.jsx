@@ -10,7 +10,11 @@ import CommentsContainer from "../../../components/comments/CommentsContainer";
 import Editor from "../../../components/editor/Editor";
 import ArticleDetailsSkeleton from "../../../components/skeleton/ArticleDetailsSkeleton";
 import { stables } from "../../../constants";
-import { getSinglePost, updatePost } from "../../../services/index/posts";
+import {
+  generatePostData,
+  getSinglePost,
+  updatePost,
+} from "../../../services/index/posts";
 import { PostCategories } from "../../../utils/categoryTypes";
 
 const EditPost = () => {
@@ -21,6 +25,7 @@ const EditPost = () => {
   const { slug } = useParams();
   const { userInfo } = useSelector((state) => state.user);
   const queryClient = useQueryClient();
+  const [generatingData, setGeneratingData] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost(slug),
@@ -53,6 +58,25 @@ const EditPost = () => {
   useEffect(() => {
     setCategory(data?.post?.categories[0]);
   }, [data?.post]);
+
+  const handleGeneratePost = async () => {
+    if (isLoading) return;
+    try {
+      setGeneratingData(true);
+      setBody("<p>Generating content. Please Wait...</p>");
+      const generatedBody = await generatePostData(
+        data?.post?.title,
+        data?.post?.body,
+        userInfo.token,
+      );
+      setBody(generatedBody?.content);
+      toast.success(generatedBody.message);
+      setGeneratingData(false);
+    } catch (error) {
+      toast.error(error.message);
+      setGeneratingData(false);
+    }
+  };
 
   useMemo(() => {
     if (!isLoading && !isError) {
@@ -169,7 +193,7 @@ const EditPost = () => {
           {!isLoading && !isError && (
             <Editor
               key={data?.post?._id}
-              content={data?.post?.body}
+              content={body ?? data?.post?.body}
               editable={true}
               onDataChange={(data) => setBody(data)}
             />
@@ -180,6 +204,13 @@ const EditPost = () => {
           className=" m-2 rounded-lg bg-primary px-3 py-2 text-white transition-all ease-linear hover:bg-blue-700 disabled:cursor-not-allowed"
         >
           Update
+        </button>
+        <button
+          onClick={handleGeneratePost}
+          disabled={generatingData}
+          className="m-2 rounded-lg bg-green-500 px-3 py-2 text-white transition-all ease-linear hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-green-300"
+        >
+          Enhance Content Using AI
         </button>
         <SocialShare url={pageUrl} title={title} />
         <CommentsContainer

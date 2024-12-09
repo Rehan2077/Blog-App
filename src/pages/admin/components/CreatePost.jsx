@@ -5,7 +5,7 @@ import { HiOutlineCamera } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Editor from "../../../components/editor/Editor";
-import { createPost } from "../../../services/index/posts";
+import { createPost, generatePostData } from "../../../services/index/posts";
 import { PostCategories } from "../../../utils/categoryTypes";
 
 const CreatePost = () => {
@@ -15,6 +15,7 @@ const CreatePost = () => {
   const [caption, setCaption] = useState(null);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Category");
+  const [generatingData, setGeneratingData] = useState(false);
 
   const { userInfo } = useSelector((state) => state.user);
 
@@ -62,6 +63,24 @@ const CreatePost = () => {
     } catch (error) {
       toast.error(error.message);
       console.log(error);
+    }
+  };
+
+  const handleGeneratePost = async () => {
+    try {
+      setGeneratingData(true);
+      setBody("<p>Generating content. Please Wait...</p>");
+      const generatedBody = await generatePostData(
+        title,
+        caption,
+        userInfo.token,
+      );
+      setBody(generatedBody?.content);
+      toast.success(generatedBody.message);
+      setGeneratingData(false);
+    } catch (error) {
+      toast.error(error.message);
+      setGeneratingData(false);
     }
   };
 
@@ -133,7 +152,7 @@ const CreatePost = () => {
 
           <div className=" leading-relaxed text-dark-soft opacity-90 lg:mb-3 lg:text-lg">
             <Editor
-              content={"<p>Write Here...</p>"}
+              content={body ?? "<p>Write Here...</p>"}
               editable={true}
               onDataChange={(data) => setBody(data)}
             />
@@ -143,6 +162,20 @@ const CreatePost = () => {
             className=" m-2 rounded-lg bg-primary px-3 py-2 text-white transition-all ease-linear hover:bg-blue-700 disabled:cursor-not-allowed"
           >
             Create Post
+          </button>
+          <button
+            onClick={handleGeneratePost}
+            disabled={generatingData || title.length <= 10}
+            className="m-2 rounded-lg bg-red-500 px-3 py-2 text-white transition-all ease-linear hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-red-300"
+          >
+            Generate Content Using AI
+          </button>
+          <button
+            onClick={handleGeneratePost}
+            disabled={!body || generatingData}
+            className="m-2 rounded-lg bg-green-500 px-3 py-2 text-white transition-all ease-linear hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-green-300"
+          >
+            Enhance Content Using AI
           </button>
         </form>
       </article>

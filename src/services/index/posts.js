@@ -73,3 +73,44 @@ export const createPost = async ({ postData, token }) => {
     throw new Error(error.message);
   }
 };
+
+export const likePost = async (slug, token) => {
+  try {
+    if (!token) throw new Error("You are not logged in");
+    const { data } = await axios.patch(
+      `${url}/api/v1/posts/${slug}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const generatePostData = async (title, description, token) => {
+  try {
+    if (title.length < 10)
+      throw new Error("Title must be at least 10 characters long");
+    const { data } = await axios.post(
+      `${url}/api/v1/posts/generate`,
+      { title, description },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
